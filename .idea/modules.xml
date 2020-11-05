@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/MariosPizzaBar.iml" filepath="$PROJECT_DIR$/.idea/MariosPizzaBar.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/MariosPizzaBar.iml" filepath="$PROJECT_DIR$/MariosPizzaBar.iml" />
+>>>>>>> UseCaseDomain_AJ
     </modules>
   </component>
 </project>
