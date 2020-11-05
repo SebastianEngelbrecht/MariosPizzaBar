@@ -21,8 +21,8 @@ private static UI showMenu;
                 break;
 
             case 2:
-                System.out.println("Creating New Ordre");
-                OrdreMenu();
+                System.out.println("Creating New Order");
+                OrderMenu();
                 break;
 
             case 3:
@@ -45,9 +45,9 @@ private static UI showMenu;
 
         switch ((int)Mathf.Clamp(showMenu.inputScanner(),1, 31)) {
             case 1:
-                if (from.equals("Ordrer")) {
-                    System.out.println("Returning to Ordre Menu");
-                    OrdreMenu();
+                if (from.equals("Order")) {
+                    System.out.println("Returning to Order Menu");
+                    OrderMenu();
                 }else {
                     System.out.println("Returning to Start");
                     StartMenu();
@@ -59,7 +59,7 @@ private static UI showMenu;
         }
     }
 
-    public static void OrdreMenu(){
+    public static void OrderMenu(){
         showMenu.displayOrdreUI();
 
         switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
