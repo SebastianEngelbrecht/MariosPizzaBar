@@ -1,0 +1,39 @@
+@startuml
+
+hide Methods
+
+class Pizzabar{
+
+}
+class Menukort{
+
+}
+
+class Bestilling {
+-Betaling
+-Afhentning
+-Liste
+-Telefon
+-Tidspunkt
+-Computer
+}
+
+class Pizza {
+-Varianter
+}
+
+class Kunde {
+
+}
+
+class Omsætning {
+-statitik
+}
+
+Pizzabar "1" -RIGHT- "1" Menukort
+Menukort "1" -RIGHT- "*" Pizza : har
+Pizzabar "1" -- "*" Bestilling
+Kunde "1" -LEFT- "*" Bestilling
+Pizzabar "1" -- "1" Omsætning
+
+@enduml
