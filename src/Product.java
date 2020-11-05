@@ -18,4 +18,9 @@ public class Product {
     public float getPrice() {
         return price;
     }
+
+    public String getDescription()
+    {
+        return description;
+    }
 }

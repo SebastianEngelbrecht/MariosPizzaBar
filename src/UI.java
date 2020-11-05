@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class UI {
-    private static int lineCount = 50;
+    private static int lineCount = 110;
 
 
     public void displayStartUI(){
@@ -22,7 +22,10 @@ public class UI {
         displayText("MENU CARD");
         displayText(0, "RETURN");
         for (int i = 0; i < card.getProductSize(); i++)
-            displayText((1 + i)+ " " +list[i].getName() + " " + list[i].getPrice() + "kr.", true);
+        {
+            displayText((1 + i) + " " + list[i].getName() + "  -" + list[i].getDescription() + "-  " + list[i].getPrice() + "kr.", true);
+//            displayText(list[i].getDescription());
+        }
         displayText();
     }
 
