@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Mario
+actor Alfonso
+actor Customer
+
+rectangle "Mario's Pizzaria"{
+ Mario -- (Menu Kort)
+ Mario -- (Bestillings liste)
+
+
+ Alfonso -- (Menu Kort)
+ Alfonso -- (Bestillings liste)
+ Alfonso -- (Indtaste order)
+
+ Alfonso -- Customer
+}
+@enduml
