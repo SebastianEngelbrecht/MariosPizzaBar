@@ -27,18 +27,18 @@ public class UI {
 
     public void displayOrdreUI(){
         displayText();
-        displayText("Ordrer muligheder");
-        displayText(1, "TILFØJ TIL ORDRER");
-        displayText(2, "FJERN FRA ORDRER");
-        displayText(3, "FÆRDIGGØR ORDRER");
-        displayText(4, "CANCEL ORDRER");
+        displayText("Select an option");
+        displayText(1, "ADD ORDER", true);
+        displayText(2, "REMOVE ORDER", true);
+        displayText(3, "FINISH ORDER", true);
+        displayText(4, "CANCEL ORDER", true);
         displayText();
     }
 
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDRE");
-        displayText(0, "Return");
+        displayText(0, "RETURN");
 
         float totalPrice = 0;
         for (Product product: currentOrder.getList()) {
@@ -51,7 +51,7 @@ public class UI {
 
     public void displaySure(){
         displayText();
-        displayText("Are you sure?");
+        displayText("ARE YOU SURE?");
         displayText(1, "YES", true);
         displayText(2, "NO", true);
         displayText();
@@ -172,7 +172,7 @@ public class UI {
     public int inputScanner(){
         Scanner inputScanner = new Scanner(System.in);
         int result = inputScanner.nextInt();
-        System.out.println("You have selected: " + result);
+        System.out.println("YOU HAVE SELECTED: " + result);
         return result;
     }
 
