@@ -22,7 +22,7 @@ public class UI {
         displayText("MENU CARD");
         displayText(0, "RETURN");
         for (int i = 0; i < card.getProductSize(); i++)
-            displayText((1 + i)+ " " +list[i].getName() + " " + list[i].getPrice() + "kr.", true);
+            displayText((list[i].getIndex()) + ". " + list[i].getName() + " " + list[i].getPrice() + "kr.", true);
         displayText();
     }
 
@@ -31,7 +31,30 @@ public class UI {
         displayText("Ordrer muligheder");
         displayText(1, "TILFØJ TIL ORDRER");
         displayText(2, "FJERN FRA ORDRER");
-        displayText(3, "CANCEL ORDRER");
+        displayText(3, "FÆRDIGGØR ORDRER");
+        displayText(4, "CANCEL ORDRER");
+        displayText();
+    }
+
+    public void displayCurrentOrder(Order currentOrder){
+        displayText();
+        displayText("CURRENT ORDRE");
+        displayText(0, "Return");
+
+        float totalPrice = 0;
+        for (Product product: currentOrder.getList()) {
+            displayText(product.getIndex() + ". " + product.getName() + " " + product.getPrice() + "kr.", true);
+            totalPrice += product.getPrice();
+        }
+        displayText(totalPrice + "kr.");
+        displayText();
+    }
+
+    public void displaySure(){
+        displayText();
+        displayText("Are you sure?");
+        displayText(1, "YES", true);
+        displayText(2, "NO", true);
         displayText();
     }
 
