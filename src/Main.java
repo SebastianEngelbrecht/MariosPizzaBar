@@ -21,7 +21,7 @@ public class Main {
         {
             case 1:
                 System.out.println("Showing Menu Card");
-                MenuCard("Start");
+                MenuCard();
                 break;
 
             case 2:
@@ -49,21 +49,20 @@ public class Main {
         }
     }
 
-    public static void MenuCard(String from){
+    public static void MenuCard(){
         showMenu.displayMenuUI(menuCard);
 
-            switch (showMenu.inputScanner()) {
-                case 0:
-                        System.out.println("Returning to Start");
-                        StartMenu();
-                    break;
+            if (showMenu.inputScanner() == 0) {
+                System.out.println("Returning to Start");
+                StartMenu();
 
-                default:
-                        System.out.println("Error!");
-                        System.out.println("Cannot interpet input.");
-                        System.out.println("Try again.");
-                        MenuCard(from);
-                    break;
+            }
+            else
+            {
+                System.out.println("Error!");
+                System.out.println("Cannot interpet input.");
+                System.out.println("Try again.");
+                MenuCard();
             }
     }
 
@@ -85,17 +84,15 @@ public class Main {
 
                 int choice = showMenu.inputScanner();
 
-                switch (choice){
-                    case 0:
-                        OrdreMenu();
-                        break;
-
-                    default:
-                        currentOrdre.removeOrder(choice, 1);
-                        OrdreMenu();
-                        break;
+                if (choice == 0) {
+                    OrdreMenu();
+                    break;
                 }
-
+                else
+                {
+                    currentOrdre.removeOrder(choice, 1);
+                    OrdreMenu();
+                }
                 break;
 
             case 3:
@@ -104,6 +101,9 @@ public class Main {
                 switch (showMenu.inputScanner()){
                     case 1:
 
+                        break;
+
+                    case 2:
                         break;
 
                     default:

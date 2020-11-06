@@ -21,17 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="423674a2-4ade-48a3-949b-c4870375619a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MariosPizzaBar/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MariosPizzaBar/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MariosPizzaBar/MenuCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MariosPizzaBar/MenuCard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MariosPizzaBar/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MariosPizzaBar/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MariosPizzaBar/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MariosPizzaBar/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MariosPizzaBar/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MariosPizzaBar/UI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mathf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mathf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
