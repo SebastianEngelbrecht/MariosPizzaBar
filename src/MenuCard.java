@@ -28,7 +28,10 @@ public class MenuCard {
         for (String data: dataCollection.split("//")) {
            String[] fromData = data.split(";");
 
-           Product toAdd = new Product(fromData[1],fromData[2],fromData[3]);
+           if(fromData[0].charAt(0) == 'n')
+               fromData[0] = fromData[0].split("null")[1];
+
+           Product toAdd = new Product(fromData[0],fromData[1],fromData[2],fromData[3]);
            productsList.add(toAdd);
         }
     }
@@ -44,5 +47,14 @@ public class MenuCard {
 
     public int getProductSize(){
         return productsList.size();
+    }
+
+    public Product getProductByIndex(int index){
+        for (Product product: productsList) {
+            if(product.getIndex() == index)
+                return product;
+        }
+
+        return null;
     }
 }
