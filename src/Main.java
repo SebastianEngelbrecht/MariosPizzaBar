@@ -23,7 +23,7 @@ public class Main {
                 break;
 
             case 2:
-                System.out.println("Creating New Ordre");
+                System.out.println("Creating New Order");
                 OrdreMenu();
                 break;
 
@@ -40,7 +40,7 @@ public class Main {
 
             default:
                 System.out.println("Error!");
-                System.out.println("Cannot interpet input.");
+                System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
                 StartMenu();
                 break;
@@ -58,7 +58,7 @@ public class Main {
         else
         {
             System.out.println("Error!");
-            System.out.println("Cannot interpet input.");
+            System.out.println("Cannot interpret input.");
             System.out.println("Try again.");
             MenuCard();
         }
@@ -119,7 +119,7 @@ public class Main {
 
             default:
                 System.out.println("Error!");
-                System.out.println("Cannot interpet input.");
+                System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
                 OrdreMenu();
                 break;
@@ -140,7 +140,7 @@ public class Main {
         else
         {
             System.out.println("Error!");
-            System.out.println("Cannot interpet input.");
+            System.out.println("Cannot interpret input.");
             System.out.println("Try again.");
             selectToAdd();
         }
