@@ -21,7 +21,7 @@ public class UI {
         displayText("MENU CARD");
         displayText(0, "RETURN");
         for (int i = 0; i < card.getProductSize(); i++)
-            displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription() + " -- " + list[i].getPrice() + "kr.", true);
+            displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription(), list[i].getPrice() + "kr.");
         displayText();
     }
 
@@ -42,7 +42,7 @@ public class UI {
 
         float totalPrice = 0;
         for (Product product: currentOrder.getList()) {
-            displayText(product.getIndex() + ". " + product.getName() + " " + product.getPrice() + "kr.", true);
+            displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
             totalPrice += product.getPrice();
         }
         displayText(totalPrice + "kr.");
@@ -163,6 +163,31 @@ public class UI {
 
         System.out.println(result);
     }
+
+    public static void displayText(String text, String kr){
+        String result = "|";
+
+        int i = 0;
+        for(i = 0; i < 6; i++)
+            result += " ";
+
+        result += text;
+        int toAdd = lineCount - (result.length() + kr.length() + 6);
+        for (i = 0; i < toAdd + 1; i++)
+            result += " ";
+
+        result += kr;
+
+        toAdd = lineCount - result.length();
+        for (i = 0; i < toAdd + 1; i++)
+            result += " ";
+
+        result += "|";
+
+        System.out.println(result);
+    }
+
+
     //endregion
 
     public void displayLine(){
