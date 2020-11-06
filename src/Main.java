@@ -1,6 +1,8 @@
 public class Main {
-private static MenuCard menuCard;
-private static UI showMenu;
+    private static MenuCard menuCard;
+    private static UI showMenu;
+    private static Order currentOrdre = null;
+
 
     public static void main(String[] args) {
         menuCard = new MenuCard();
@@ -13,16 +15,16 @@ private static UI showMenu;
     public static void StartMenu(){
         showMenu.displayStartUI();
 
-        switch ((int)Mathf.Clamp(showMenu.inputScanner(),1,5))
+        switch (showMenu.inputScanner())
         {
             case 1:
                 System.out.println("Showing Menu Card");
-                MenuCard("Start");
+                MenuCard();
                 break;
 
             case 2:
-                System.out.println("Creating New Order");
-                OrderMenu();
+                System.out.println("Creating New Ordre");
+                OrdreMenu();
                 break;
 
             case 3:
@@ -32,47 +34,115 @@ private static UI showMenu;
                 break;
 
             case 5:
+                System.out.println("Ending Application");
+                System.out.println("Goodbye!");
                 break;
 
             default:
-                System.out.println("Error! Try again.");
+                System.out.println("Error!");
+                System.out.println("Cannot interpet input.");
+                System.out.println("Try again.");
+                StartMenu();
                 break;
         }
     }
 
-    public static void MenuCard(String from){
+    public static void MenuCard(){
         showMenu.displayMenuUI(menuCard);
 
-        switch ((int)Mathf.Clamp(showMenu.inputScanner(),1, 31)) {
-            case 1:
-                if (from.equals("Order")) {
-                    System.out.println("Returning to Order Menu");
-                    OrderMenu();
-                }else {
-                    System.out.println("Returning to Start");
-                    StartMenu();
-                }break;
+        if (showMenu.inputScanner() == 0) {
+            System.out.println("Returning to Start");
+            StartMenu();
 
-            default:
-
-                break;
+        }
+        else
+        {
+            System.out.println("Error!");
+            System.out.println("Cannot interpet input.");
+            System.out.println("Try again.");
+            MenuCard();
         }
     }
 
-    public static void OrderMenu(){
+    public static void OrdreMenu(){
+        if(currentOrdre == null)
+            currentOrdre = new Order();
+
         showMenu.displayOrdreUI();
 
-        switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
+        switch (showMenu.inputScanner()){
             case 1:
+                //Add to Ordrer
+                selectToAdd();
                 break;
 
             case 2:
+                //Remove from Ordrer
+                showMenu.displayCurrentOrder(currentOrdre);
+
+                int choice = showMenu.inputScanner();
+
+                if (choice == 0) {
+                    OrdreMenu();
+                    break;
+                }
+                else
+                {
+                    currentOrdre.removeOrder(choice, 1);
+                    OrdreMenu();
+                }
                 break;
 
             case 3:
+                showMenu.displaySure();
+
+                switch (showMenu.inputScanner()){
+                    case 1:
+
+                        break;
+
+                    case 2:
+                        break;
+
+                    default:
+                        OrdreMenu();
+                        break;
+                }
+                break;
+
+            case 4:
+                System.out.println("Canceling Order");
                 System.out.println("Returning to Start");
+                currentOrdre = null;
                 StartMenu();
                 break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpet input.");
+                System.out.println("Try again.");
+                OrdreMenu();
+                break;
+        }
+    }
+
+    public static void selectToAdd() {
+        showMenu.displayMenuUI(menuCard);
+        int choice = showMenu.inputScanner();
+
+        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
+        {
+            currentOrdre.addOrder(menuCard.getProductByIndex(choice));
+            OrdreMenu();
+        }
+        else if(choice == 0)
+            OrdreMenu();
+        else
+        {
+            System.out.println("Error!");
+            System.out.println("Cannot interpet input.");
+            System.out.println("Try again.");
+            selectToAdd();
         }
     }
 }
