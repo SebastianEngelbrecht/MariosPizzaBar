@@ -27,7 +27,7 @@ public class UI {
 
     public void displayOrdreUI(){
         displayText();
-        displayText("Select an option");
+        displayText("Select An Option");
         displayText(1, "ADD ORDER", true);
         displayText(2, "REMOVE ORDER", true);
         displayText(3, "FINISH ORDER", true);
@@ -37,7 +37,7 @@ public class UI {
 
     public void displayCurrentOrder(Order currentOrder){
         displayText();
-        displayText("CURRENT ORDRE");
+        displayText("CURRENT ORDER");
         displayText(0, "RETURN");
 
         float totalPrice = 0;
