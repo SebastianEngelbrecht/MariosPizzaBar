@@ -81,6 +81,15 @@ public class UI {
         displayText();
     }
 
+    public void displayMaintenanceUI(){
+        displayText();
+        displayText("MAINTENANCE");
+        displayText();
+        displayText(1,"MAINTAIN TEST",true);
+        displayText(2,"MAINTAIN TEST",true);
+        displayText();
+    }
+
     public void displaySure(){
         displayText();
         displayText("ARE YOU SURE?");
