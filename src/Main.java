@@ -5,11 +5,14 @@ public class Main {
 
 
     public static void main(String[] args) {
+        MyGui myGui = new MyGui();
+        myGui.show();
         menuCard = new MenuCard();
         showMenu = new UI();
 
         menuCard.loadCard();
         StartMenu();
+
     }
 
     public static void StartMenu(){
