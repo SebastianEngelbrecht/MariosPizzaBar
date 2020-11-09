@@ -30,4 +30,15 @@ public class Order {
         for (i = 0; i < amount; i++)
             list.remove(toRemoveList[i]);
     }
+
+    @Override
+    public String toString()
+    {
+        String result = "";
+        for (Product product: list)
+        {
+            result += product.getName() + ", " + product.getDescription() + "\n";
+        }
+        return result;
+    }
 }

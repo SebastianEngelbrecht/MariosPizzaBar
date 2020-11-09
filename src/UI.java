@@ -50,24 +50,34 @@ public class UI {
         displayText();
     }
 
-    public void displayActiveOrder(Order[]Active){
+    public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
         displayText(0, "RETURN");
-        if (Active.length != 0)
-        {
-            for (Order o : Active)
-            {
-                float totalPrice = 0;
-                for (Product product : o.getList())
-                {
-                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
-                    totalPrice += product.getPrice();
-                }
 
-                displayText(totalPrice + "kr.");
-            }
-        }
+
+//        for (Product product: Active.getList())
+//        {
+//            displayText(product.getName() + product.getDescription());
+//        }
+
+
+
+//        if (Active.length != 0)
+//        {
+//            for (Order o : Active)
+//            {
+//                float totalPrice = 0;
+//                for (Product product : o.getList())
+//                {
+//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+//                    totalPrice += product.getPrice();
+//                }
+//
+//                displayText(totalPrice + "kr.");
+//            }
+//        }
+
         displayText();
     }
 
