@@ -18,10 +18,9 @@ public class UI {
 
         displayText();
         displayText("MENU CARD");
-        displayText();
-        for (int i = 0; i < card.getProductSize(); i++)
+        System.out.println(list.length);
+        for (int i = 0; i < list.length; i++)
             displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription(), list[i].getPrice() + "kr.");
-        displayText();
         displayText(0, "BACK TO MENU");
         displayText();
     }
@@ -56,9 +55,7 @@ public class UI {
         for (int i = 0; i < card.getProductSize(); i++) {
             displayText("ORDER " + (i) + ": " + list[i].getPrice() + " kr.", true);
         }
-        displayText();
         displayText("TOTAL: ",true);
-        displayText();
         displayText(3, "BACK TO MAIN MENU",true);
         displayText();
 
@@ -67,16 +64,12 @@ public class UI {
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");
-        displayText();
-
-
         float totalPrice = 0;
         for (Product product: currentOrder.getList()) {
             displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
             totalPrice += product.getPrice();
         }
         displayText(totalPrice + "kr.");
-        displayText();
         displayText(0, "RETURN");
         displayText();
     }
@@ -84,33 +77,12 @@ public class UI {
     public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
-        displayText();
         for (Order order: Active)
         {
             for (Product product : order.getList())
             displayText(product.getName() + product.getDescription());
         }
-        displayText();
         displayText(0, "RETURN");
-
-
-
-
-//        if (Active.length != 0)
-//        {
-//            for (Order o : Active)
-//            {
-//                float totalPrice = 0;
-//                for (Product product : o.getList())
-//                {
-//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
-//                    totalPrice += product.getPrice();
-//                }
-//
-//                displayText(totalPrice + "kr.");
-//            }
-//        }
-
         displayText();
     }
 

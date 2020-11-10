@@ -1,3 +1,4 @@
+import static java.lang.Integer.parseInt;
 import static java.lang.Float.parseFloat;
 
 public class Product {
@@ -7,7 +8,7 @@ public class Product {
     private float price;
 
     public Product(String index, String name, String description, String price) {
-        this.index = (int)parseFloat(index);
+        this.index = parseInt(index);
         this.name = name;
         this.description = description;
         this.price = parseFloat(price) * -1;

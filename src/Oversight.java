@@ -80,8 +80,6 @@ public class Oversight {
             e.printStackTrace();
         }
 
-        System.out.println(dataCollection);
-
         for (String s: dataCollection) {
             Order toAdd = new Order();
 
