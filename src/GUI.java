@@ -141,6 +141,10 @@ public class MyGui {
         themeMenu.add(darkTheme);
         themeMenu.setForeground(fileMenuTextColor);
 
+        exitItem.addActionListener(e -> {
+            System.exit(0);
+        });
+
         lightTheme.addActionListener(e -> {
 
             themeDark = false;
@@ -197,38 +201,6 @@ public class MyGui {
         buttons.setLayout(buttonsLayoutManager);
 
         menuCardButton.addActionListener(showMenuCard);
-//        menuCardButton.addActionListener(e -> {
-//            String leftLine = null;
-//            String rightLine = null;
-//
-//            centerPanelLeft.setEditable(true);
-//            centerPanelLeft.setText("");
-//            String leftResult = "";
-//
-//            centerPanelRight.setEditable(true);
-//            centerPanelRight.setText("");
-//            String rightResult = "";
-//
-//            for (int i = 0; i < menuCard.getProductSize(); i++) {
-//                leftLine = ((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription());
-//                leftResult += leftLine + "\n";
-//            }
-//            for (int i = 0; i < menuCard.getProductSize(); i++) {
-//                rightLine = ((list[i].getPrice() + "kr."));
-//                rightResult += rightLine + "\n";
-//            }
-//
-//            centerPanelLeft.setText(leftResult);
-//            centerPanelLeft.setFont(new Font("Comic sans", Font.PLAIN, 12));
-//            centerPanelLeft.setForeground(centerPanelTextColor);
-//            centerPanelLeft.setEditable(false);
-//
-//            centerPanelRight.setText(rightResult);
-//            centerPanelRight.setFont(new Font("Comic sans", Font.PLAIN, 12));
-//            centerPanelRight.setForeground(centerPanelTextColor);
-//            centerPanelRight.setEditable(false);
-//        });
-
         menuCardButton.setBackground(menuCardButtonColor);
         menuCardButton.setBorder(BorderFactory.createRaisedBevelBorder());
         buttonPress(menuCardButton);
