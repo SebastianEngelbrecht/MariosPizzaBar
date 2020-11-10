@@ -53,32 +53,16 @@ public class UI {
     public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
-
         displayText(0, "RETURN");
         for (Order order: Active)
         {
+            displayText(order.getTimeStamp(),true);
             for (Product product : order.getList())
-            displayText(product.getName() + product.getDescription());
+            {
+                displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+            }
+            displayText("");
         }
-
-
-
-
-//        if (Active.length != 0)
-//        {
-//            for (Order o : Active)
-//            {
-//                float totalPrice = 0;
-//                for (Product product : o.getList())
-//                {
-//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
-//                    totalPrice += product.getPrice();
-//                }
-//
-//                displayText(totalPrice + "kr.");
-//            }
-//        }
-
         displayText();
     }
 

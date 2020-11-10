@@ -2,6 +2,17 @@ import java.util.ArrayList;
 
 public class Order {
     private ArrayList<Product> list = new ArrayList<>();
+    private String timeStamp;
+
+    public void setTimeStamp(String timeStamp)
+    {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getTimeStamp()
+    {
+        return timeStamp;
+    }
 
     public Product[] getList(){
         Product[] result = new Product[list.size()];

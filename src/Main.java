@@ -194,6 +194,7 @@ public class Main {
             FileWriter file = new FileWriter("ActiveOrder.csv");
             file.write(currentOrdre.toString() + " - " + formatter.format(date));
             file.close();
+            currentOrdre.setTimeStamp(formatter.format(date));
             Active.add(currentOrdre);
             currentOrdre = null;
         } catch (Exception e)
@@ -213,7 +214,6 @@ public class Main {
             while (activeScanner.hasNextLine())
             {
                 String data = activeScanner.nextLine();
-//                System.out.println(data);
             }
             activeScanner.close();
         } catch (Exception e)
