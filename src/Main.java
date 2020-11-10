@@ -11,12 +11,14 @@ public class Main {
     private static MenuCard menuCard;
     private static UI showMenu;
     private static Order currentOrdre = null;
-    private static Order[]Active = new Order[0];
+    private static List<Order> activeOrders = new ArrayList<>();
 
 
     public static void main(String[] args) {
         menuCard = new MenuCard();
         showMenu = new UI();
+
+        Oversight.LoadFromOversight();
 
         menuCard.loadCard();
         StartMenu();
@@ -108,7 +110,11 @@ public class Main {
 
                 switch (showMenu.inputScanner()){
                     case 1:
-
+                        menuCard.saveOrder(currentOrdre);
+                        activeOrders.add(currentOrdre);
+                        Oversight.SaveToOversight(currentOrdre);
+                        currentOrdre = null;
+                        OrdreMenu();
                         break;
 
                     case 2:
@@ -122,7 +128,7 @@ public class Main {
 
             case 4:
                 //Active order list
-                showMenu.displayActiveOrder(Active);
+                showMenu.displayActiveOrder(activeOrders.toArray(new Order[activeOrders.size()]));
                 try
                 {
                     long startTime = System.currentTimeMillis();
