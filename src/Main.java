@@ -78,12 +78,12 @@ public class Main {
         switch (showMenu.inputScanner())
         {
             case 1:
-                //Add to Pizza
+                //Add Pizza
                 selectToAdd();
                 break;
 
             case 2:
-                //Remove from Pizza
+                //Remove Pizza
                 showMenu.displayCurrentOrder(currentOrdre);
 
                 int choice = showMenu.inputScanner();
@@ -182,7 +182,7 @@ public class Main {
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
 
-        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
+        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
         {
             currentOrdre.addOrder(menuCard.getProductByIndex(choice));
             OrderMenu();

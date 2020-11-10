@@ -67,7 +67,8 @@ public class UI {
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");
-        displayText(0, "RETURN");
+        displayText();
+
 
         float totalPrice = 0;
         for (Product product: currentOrder.getList()) {
@@ -76,18 +77,21 @@ public class UI {
         }
         displayText(totalPrice + "kr.");
         displayText();
+        displayText(0, "RETURN");
+        displayText();
     }
 
     public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
-
-        displayText(0, "RETURN");
+        displayText();
         for (Order order: Active)
         {
             for (Product product : order.getList())
             displayText(product.getName() + product.getDescription());
         }
+        displayText();
+        displayText(0, "RETURN");
 
 
 
