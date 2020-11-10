@@ -28,10 +28,11 @@ public class UI {
     public void displayOrdreUI(){
         displayText();
         displayText("Select An Option");
-        displayText(1, "ADD ORDER", true);
-        displayText(2, "REMOVE ORDER", true);
+        displayText(1, "ADD PIZZA", true);
+        displayText(2, "REMOVE PIZZA", true);
         displayText(3, "FINISH ORDER", true);
-        displayText(4, "CANCEL ORDER", true);
+        displayText(4, "ACTIVE ORDERS", true);
+        displayText(5, "CANCEL ORDER", true);
         displayText();
     }
 
@@ -46,6 +47,37 @@ public class UI {
             totalPrice += product.getPrice();
         }
         displayText(totalPrice + "kr.");
+        displayText();
+    }
+
+    public void displayActiveOrder(Order[] Active){
+        displayText();
+        displayText("ACTIVE ORDERS");
+        displayText(0, "RETURN");
+
+
+//        for (Product product: Active.getList())
+//        {
+//            displayText(product.getName() + product.getDescription());
+//        }
+
+
+
+//        if (Active.length != 0)
+//        {
+//            for (Order o : Active)
+//            {
+//                float totalPrice = 0;
+//                for (Product product : o.getList())
+//                {
+//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+//                    totalPrice += product.getPrice();
+//                }
+//
+//                displayText(totalPrice + "kr.");
+//            }
+//        }
+
         displayText();
     }
 

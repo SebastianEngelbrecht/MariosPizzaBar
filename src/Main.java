@@ -1,7 +1,14 @@
+import javax.imageio.IIOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Scanner;
+
 public class Main {
     private static MenuCard menuCard;
     private static UI showMenu;
     private static Order currentOrdre = null;
+    private static Order[] Active = new Order[0];
 
 
     public static void main(String[] args) {
@@ -73,23 +80,24 @@ public class Main {
 
         showMenu.displayOrdreUI();
 
-        switch (showMenu.inputScanner()){
+        switch (showMenu.inputScanner())
+        {
             case 1:
-                //Add to Ordrer
+                //Add to Pizza
                 selectToAdd();
                 break;
 
             case 2:
-                //Remove from Ordrer
+                //Remove from Pizza
                 showMenu.displayCurrentOrder(currentOrdre);
 
                 int choice = showMenu.inputScanner();
 
-                if (choice == 0) {
+                if (choice == 0)
+                {
                     OrdreMenu();
                     break;
-                }
-                else
+                } else
                 {
                     currentOrdre.removeOrder(choice, 1);
                     OrdreMenu();
@@ -99,12 +107,16 @@ public class Main {
             case 3:
                 showMenu.displaySure();
 
-                switch (showMenu.inputScanner()){
+                switch (showMenu.inputScanner())
+                {
                     case 1:
-
+                        //Save Current Order (YES)
+                        SaveOrder();
                         break;
 
                     case 2:
+                        //Cancel Current Order (NO)
+                        OrdreMenu();
                         break;
 
                     default:
@@ -114,6 +126,11 @@ public class Main {
                 break;
 
             case 4:
+                showMenu.displayActiveOrder(Active);
+                ActiveOrder();
+                break;
+
+            case 5:
                 System.out.println("Canceling Order");
                 System.out.println("Returning to Start");
                 currentOrdre = null;
@@ -146,6 +163,56 @@ public class Main {
             System.out.println("Cannot interpret input.");
             System.out.println("Try again.");
             selectToAdd();
+        }
+    }
+
+    public static void SaveOrder()
+    {
+        try
+        {
+            long startTime = System.currentTimeMillis();
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date(startTime);
+
+            FileWriter file = new FileWriter("ActiveOrder.csv");
+            file.write(currentOrdre.toString() + " - " + formatter.format(date));
+            file.close();
+        } catch (Exception e)
+        {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        OrdreMenu();
+    }
+
+    public static void ActiveOrder()
+    {
+        try
+        {
+            File active = new File("ActiveOrder.csv");
+            Scanner activeScanner = new Scanner(active);
+            while (activeScanner.hasNextLine())
+            {
+                String data = activeScanner.nextLine();
+                System.out.println(data);
+            }
+            activeScanner.close();
+        } catch (Exception e)
+        {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        int choice = showMenu.inputScanner();
+
+        if (choice == 0)
+        {
+            OrdreMenu();
+        } else
+        {
+            System.out.println("Error!");
+            System.out.println("Cannot interpret input.");
+            System.out.println("Try again.");
+            ActiveOrder();
         }
     }
 }
