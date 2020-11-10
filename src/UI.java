@@ -9,7 +9,6 @@ public class UI {
         displayText(1,"MENU CARD",true);
         displayText(2,"ORDER",true);
         displayText(3,"FINANCES",true);
-        displayText(4,"MAINTENANCE",true);
         displayText(5,"QUIT",true);
         displayText();
     }
@@ -19,20 +18,22 @@ public class UI {
 
         displayText();
         displayText("MENU CARD");
-        displayText(0, "RETURN");
+        displayText();
         for (int i = 0; i < card.getProductSize(); i++)
             displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription(), list[i].getPrice() + "kr.");
         displayText();
+        displayText(0, "BACK TO MENU");
+        displayText();
     }
 
-    public void displayOrdreUI(){
+    public void displayOrderUI(){
         displayText();
         displayText("Select An Option");
         displayText(1, "ADD PIZZA", true);
         displayText(2, "REMOVE PIZZA", true);
         displayText(3, "FINISH ORDER", true);
         displayText(4, "ACTIVE ORDERS", true);
-        displayText(5, "CANCEL ORDER", true);
+        displayText(5, "BACK TO MENU", true);
         displayText();
     }
 
@@ -41,7 +42,7 @@ public class UI {
         displayText("Finances");
         displayText(1, "STATISTICS", true);
         displayText(2, "CALCULATE TURNOVER", true);
-        displayText(3, "GO BACK", true);
+        displayText(3, "BACK TO MENU", true);
         displayText();
     }
 
@@ -106,15 +107,6 @@ public class UI {
 //            }
 //        }
 
-        displayText();
-    }
-
-    public void displayMaintenanceUI(){
-        displayText();
-        displayText("MAINTENANCE");
-        displayText();
-        displayText(1,"MAINTAIN TEST",true);
-        displayText(2,"MAINTAIN TEST",true);
         displayText();
     }
 

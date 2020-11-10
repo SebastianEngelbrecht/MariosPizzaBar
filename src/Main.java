@@ -1,4 +1,3 @@
-import javax.imageio.IIOException;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,7 +30,7 @@ public class Main {
 
             case 2:
                 System.out.println("Creating New Order");
-                OrdreMenu();
+                OrderMenu();
                 break;
 
             case 3:
@@ -40,11 +39,6 @@ public class Main {
                 break;
 
             case 4:
-                System.out.println("Showing Maintenance");
-                maintenanceMenu();
-                break;
-
-            case 5:
                 System.out.println("Ending Application");
                 System.out.println("Goodbye!");
                 break;
@@ -75,11 +69,11 @@ public class Main {
         }
     }
 
-    public static void OrdreMenu(){
+    public static void OrderMenu(){
         if(currentOrdre == null)
             currentOrdre = new Order();
 
-        showMenu.displayOrdreUI();
+        showMenu.displayOrderUI();
 
         switch (showMenu.inputScanner())
         {
@@ -96,12 +90,12 @@ public class Main {
 
                 if (choice == 0)
                 {
-                    OrdreMenu();
+                    OrderMenu();
                     break;
                 } else
                 {
                     currentOrdre.removeOrder(choice, 1);
-                    OrdreMenu();
+                    OrderMenu();
                 }
                 break;
 
@@ -117,11 +111,11 @@ public class Main {
 
                     case 2:
                         //Cancel Current Order (NO)
-                        OrdreMenu();
+                        OrderMenu();
                         break;
 
                     default:
-                        OrdreMenu();
+                        OrderMenu();
                         break;
                 }
                 break;
@@ -142,7 +136,7 @@ public class Main {
                 System.out.println("Error!");
                 System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
-                OrdreMenu();
+                OrderMenu();
                 break;
         }
     }
@@ -184,24 +178,6 @@ public class Main {
         }
     }
 
-    public static void maintenanceMenu() {
-        showMenu.displayMaintenanceUI();
-
-        switch (showMenu.inputScanner()) {
-            case 1:
-                System.out.println("Testing");
-                break;
-
-            case 2:
-                System.out.println("Testing");
-                break;
-
-            case 3:
-                System.out.println("Going back to Menu");
-                break;
-        }
-    }
-
     public static void selectToAdd(){
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
@@ -209,10 +185,10 @@ public class Main {
         if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
         {
             currentOrdre.addOrder(menuCard.getProductByIndex(choice));
-            OrdreMenu();
+            OrderMenu();
         }
         else if(choice == 0)
-            OrdreMenu();
+            OrderMenu();
         else
         {
             System.out.println("Error!");
@@ -240,7 +216,7 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        OrdreMenu();
+        OrderMenu();
     }
 
     public static void ActiveOrder()
@@ -264,7 +240,7 @@ public class Main {
 
         if (choice == 0)
         {
-            OrdreMenu();
+            OrderMenu();
         } else
         {
             System.out.println("Error!");
