@@ -36,6 +36,33 @@ public class UI {
         displayText();
     }
 
+    public void displayFinancesUI(){
+        displayText();
+        displayText("Finances");
+        displayText(1, "STATISTICS", true);
+        displayText(2, "CALCULATE TURNOVER", true);
+        displayText(3, "GO BACK", true);
+        displayText();
+    }
+
+    public void displayTurnoverUI(MenuCard card){
+        Product[] list = card.getProductList();
+
+        displayText();
+        displayText("TODAY'S TURNOVER");
+        displayText();
+
+        for (int i = 0; i < card.getProductSize(); i++) {
+            displayText("ORDER " + (i) + ": " + list[i].getPrice() + " kr.", true);
+        }
+        displayText();
+        displayText("TOTAL: ",true);
+        displayText();
+        displayText(3, "BACK TO MAIN MENU",true);
+        displayText();
+
+    }
+
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");

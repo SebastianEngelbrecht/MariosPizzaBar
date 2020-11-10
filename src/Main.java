@@ -35,6 +35,8 @@ public class Main {
                 break;
 
             case 3:
+                System.out.println("Showing Finances");
+                financesMenu();
                 break;
 
             case 4:
@@ -141,6 +143,43 @@ public class Main {
                 System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
                 OrdreMenu();
+                break;
+        }
+    }
+
+    public static void financesMenu(){
+        showMenu.displayFinancesUI();
+
+        switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
+            case 1:
+                break;
+
+            case 2:
+                System.out.println("Calculating today's turnover");
+                turnoverMenu();
+                break;
+
+            case 3:
+                System.out.println("Returning to Start");
+                StartMenu();
+                break;
+        }
+    }
+
+    public static void turnoverMenu(){
+        showMenu.displayTurnoverUI(menuCard);
+
+        switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
+            case 1:
+                break;
+
+            case 2:
+                System.out.println("Calculating today's turnover");
+                break;
+
+            case 3:
+                System.out.println("Returning to Start");
+                StartMenu();
                 break;
         }
     }
