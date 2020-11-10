@@ -1,10 +1,11 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuCard {
 
-    private ArrayList<Product> productsList = new ArrayList<>();
+    private static ArrayList<Product> productsList = new ArrayList<>();
     private String dataCollection;
 
     public void loadCard() {
@@ -36,6 +37,39 @@ public class MenuCard {
         }
     }
 
+    public boolean saveOrder(Order toSave){
+        try {
+            String fileName = "orders.cvs";
+            String saveString = "";
+
+            File file = new File(fileName);
+
+            if (file.createNewFile())
+                System.out.println("File created: " + file.getName());
+
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()){
+                saveString += ("\n" + reader.nextLine());
+            }
+
+            saveString += "\n";
+            for (Product p: toSave.getList()) {
+                saveString += ";" + p.getIndex();
+            }
+
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(saveString);
+            writer.close();
+
+        }catch (Exception e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     public Product[] getProductList(){
         Product[] result = new Product[productsList.size()];
 
@@ -49,12 +83,27 @@ public class MenuCard {
         return productsList.size();
     }
 
-    public Product getProductByIndex(int index){
+    public static Product getProductByIndex(int index){
         for (Product product: productsList) {
             if(product.getIndex() == index)
                 return product;
         }
 
         return null;
+    }
+
+    public int[] inputMultiply(String input){
+        int[] result = new int[2];
+
+        char[] inputDevided = new char[input.length()];
+
+        String index = "";
+        String multiply = "";
+        for (char c: input.toCharArray()) {
+            if(c != ' ' && c != '*')
+                index += ""+c;
+        }
+
+        return result;
     }
 }

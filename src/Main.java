@@ -9,10 +9,11 @@ public class Main {
     private static Order currentOrdre = null;
     private static List <Order> Active = new ArrayList<>();
 
-
     public static void main(String[] args) {
         menuCard = new MenuCard();
         showMenu = new UI();
+
+        Oversight.LoadFromOversight();
 
         menuCard.loadCard();
         StartMenu();
