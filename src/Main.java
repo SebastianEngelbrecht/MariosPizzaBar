@@ -1,4 +1,3 @@
-import javax.imageio.IIOException;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -12,7 +11,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        MyGui myGui = new MyGui();
+        GUI myGui = new GUI();
         myGui.show();
         menuCard = new MenuCard();
         showMenu = new UI();

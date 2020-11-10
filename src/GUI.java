@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
-public class MyGui {
+public class GUI {
 
     private JFrame frame = new JFrame();
     private JLabel headerLabel = new JLabel();
@@ -48,32 +51,70 @@ public class MyGui {
     private JMenu themeMenu = new JMenu(" Themes ");
 
 
-    public MyGui() {
+    public GUI() {
         menuCard = new MenuCard();
         menuCard.loadCard();
         list = menuCard.getProductList();
-        colorTheme();
+        lookAndFeel();
+        savedTheme();
         menuSetup();
+        colorTheme();
         frameSetup();
         mainPanel();
         centerPanelSetup();
         mainMenuButtons();
     }
 
-    private void colorTheme() {
-    try {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    private void lookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-    } catch (Exception e) {
-        System.err.println("Look and feel not set.");
+        } catch (Exception e) {
+            System.err.println("Look and feel not set.");
+        }
     }
+
+    private void savedTheme() {
+        String content = null;
+        String theme = "theme";
+        String light = "light";
+        String dark = "dark";
+        String enabled = "true";
+        try {
+            FileReader readTheme = new FileReader("Theme.txt");
+            Scanner scanTheme = new Scanner(readTheme);
+            while (scanTheme.hasNext()) {
+                content = scanTheme.nextLine();
+                System.out.println(content);
+                if (content.toLowerCase().contains(theme.toLowerCase())) {
+                    if (content.toLowerCase().contains(light)) {
+                        if (content.toLowerCase().contains(enabled)) {
+                            themeLight = true;
+                            themeDark = false;
+                        }
+                    } else if (content.toLowerCase().contains(dark)) {
+                        if (content.toLowerCase().contains(enabled)) {
+                            themeDark = true;
+                            themeLight = false;
+                        }
+                    }
+                }
+            }
+            scanTheme.close();
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("File not found: " + e);
+        }
+    }
+
+    private void colorTheme() {
     if (themeDark) {
         this.mainColor = new Color(43, 43, 43);
         this.centerPanelTextColor = Color.WHITE;
         this.fileMenuTextColor = Color.WHITE;
         this.fileMenuBackgroundColor = mainColor;
         this.lineBorderColor = Color.WHITE;
-        this.secondaryBorderColor = Color.WHITE;
+        this.secondaryBorderColor = mainColor;
         this.menuCardButtonColor = Color.WHITE;
         this.orderButtonColor = Color.WHITE;
         this.financesButtonColor = Color.WHITE;
@@ -96,11 +137,11 @@ public class MyGui {
         this.themeMenuBackgroundColor = mainColor;
         this.themeMenuTextColor = Color.BLACK;
         } else {
-        this.mainColor = Color.white;
-        this.centerPanelTextColor = Color.black;
-        this.fileMenuTextColor = Color.black;
+        this.mainColor = Color.WHITE;
+        this.centerPanelTextColor = Color.BLACK;
+        this.fileMenuTextColor = Color.BLACK;
         this.fileMenuBackgroundColor = mainColor;
-        this.lineBorderColor = Color.black;
+        this.lineBorderColor = Color.BLACK;
         this.secondaryBorderColor = Color.WHITE;
         this.menuCardButtonColor = Color.WHITE;
         this.orderButtonColor = Color.WHITE;
@@ -110,7 +151,6 @@ public class MyGui {
         this.themeMenuBackgroundColor = mainColor;
         this.themeMenuTextColor = Color.BLACK;
         }
-
         menuBar.setBackground(mainColor);
         menuCardButton.setBackground(menuCardButtonColor);
         orderButton.setBackground(orderButtonColor);
