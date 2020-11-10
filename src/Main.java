@@ -8,7 +8,7 @@ public class Main {
     private static MenuCard menuCard;
     private static UI showMenu;
     private static Order currentOrdre = null;
-    private static Order[] Active = new Order[0];
+    private static List <Order> Active = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -125,7 +125,7 @@ public class Main {
                 break;
 
             case 4:
-                showMenu.displayActiveOrder(Active);
+                showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
                 ActiveOrder();
                 break;
 
@@ -194,6 +194,8 @@ public class Main {
             FileWriter file = new FileWriter("ActiveOrder.csv");
             file.write(currentOrdre.toString() + " - " + formatter.format(date));
             file.close();
+            Active.add(currentOrdre);
+            currentOrdre = null;
         } catch (Exception e)
         {
             System.out.println("An error occurred.");
@@ -211,7 +213,7 @@ public class Main {
             while (activeScanner.hasNextLine())
             {
                 String data = activeScanner.nextLine();
-                System.out.println(data);
+//                System.out.println(data);
             }
             activeScanner.close();
         } catch (Exception e)

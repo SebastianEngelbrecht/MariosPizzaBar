@@ -53,13 +53,14 @@ public class UI {
     public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
+
         displayText(0, "RETURN");
+        for (Order order: Active)
+        {
+            for (Product product : order.getList())
+            displayText(product.getName() + product.getDescription());
+        }
 
-
-//        for (Product product: Active.getList())
-//        {
-//            displayText(product.getName() + product.getDescription());
-//        }
 
 
 
