@@ -9,7 +9,6 @@ public class UI {
         displayText(1,"MENU CARD",true);
         displayText(2,"ORDER",true);
         displayText(3,"FINANCES",true);
-        displayText(4,"MAINTENANCE",true);
         displayText(5,"QUIT",true);
         displayText();
     }
@@ -19,27 +18,57 @@ public class UI {
 
         displayText();
         displayText("MENU CARD");
-        displayText(0, "RETURN");
+        displayText();
         for (int i = 0; i < card.getProductSize(); i++)
             displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription(), list[i].getPrice() + "kr.");
         displayText();
+        displayText(0, "BACK TO MENU");
+        displayText();
     }
 
-    public void displayOrdreUI(){
+    public void displayOrderUI(){
         displayText();
         displayText("Select An Option");
         displayText(1, "ADD PIZZA", true);
         displayText(2, "REMOVE PIZZA", true);
         displayText(3, "FINISH ORDER", true);
         displayText(4, "ACTIVE ORDERS", true);
-        displayText(5, "CANCEL ORDER", true);
+        displayText(5, "BACK TO MENU", true);
         displayText();
+    }
+
+    public void displayFinancesUI(){
+        displayText();
+        displayText("Finances");
+        displayText(1, "STATISTICS", true);
+        displayText(2, "CALCULATE TURNOVER", true);
+        displayText(3, "BACK TO MENU", true);
+        displayText();
+    }
+
+    public void displayTurnoverUI(MenuCard card){
+        Product[] list = card.getProductList();
+
+        displayText();
+        displayText("TODAY'S TURNOVER");
+        displayText();
+
+        for (int i = 0; i < card.getProductSize(); i++) {
+            displayText("ORDER " + (i) + ": " + list[i].getPrice() + " kr.", true);
+        }
+        displayText();
+        displayText("TOTAL: ",true);
+        displayText();
+        displayText(3, "BACK TO MAIN MENU",true);
+        displayText();
+
     }
 
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");
-        displayText(0, "RETURN");
+        displayText();
+
 
         float totalPrice = 0;
         for (Product product: currentOrder.getList()) {
@@ -48,26 +77,40 @@ public class UI {
         }
         displayText(totalPrice + "kr.");
         displayText();
+        displayText(0, "RETURN");
+        displayText();
     }
 
-    public void displayActiveOrder(Order[]Active){
+    public void displayActiveOrder(Order[] Active){
         displayText();
         displayText("ACTIVE ORDERS");
-        displayText(0, "RETURN");
-        if (Active.length != 0)
+        displayText();
+        for (Order order: Active)
         {
-            for (Order o : Active)
-            {
-                float totalPrice = 0;
-                for (Product product : o.getList())
-                {
-                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
-                    totalPrice += product.getPrice();
-                }
-
-                displayText(totalPrice + "kr.");
-            }
+            for (Product product : order.getList())
+            displayText(product.getName() + product.getDescription());
         }
+        displayText();
+        displayText(0, "RETURN");
+
+
+
+
+//        if (Active.length != 0)
+//        {
+//            for (Order o : Active)
+//            {
+//                float totalPrice = 0;
+//                for (Product product : o.getList())
+//                {
+//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+//                    totalPrice += product.getPrice();
+//                }
+//
+//                displayText(totalPrice + "kr.");
+//            }
+//        }
+
         displayText();
     }
 
