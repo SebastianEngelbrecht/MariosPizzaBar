@@ -36,7 +36,7 @@ public class MenuCard {
 
     public boolean saveOrder(Order toSave){
         try {
-            String fileName = "orders.cvs";
+            String fileName = "orders.csv";
             String saveString = "";
 
             File file = new File(fileName);

@@ -11,7 +11,7 @@ import static java.lang.Integer.parseInt;
 public class Oversight {
     public static boolean SaveToOversight(Order input) {
         try {
-            File file = new File("oversight.cvs");
+            File file = new File("oversight.csv");
 
             if (file.createNewFile())
                 System.out.println("File created: " + file.getName());
