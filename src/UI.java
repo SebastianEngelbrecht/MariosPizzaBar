@@ -81,15 +81,17 @@ public class UI {
         displayText();
         displayText("ACTIVE ORDERS");
         displayText(0, "RETURN");
-        for (Order order: Active)
+        for (int i = 0; i < Active.length; i++)
         {
-            displayText(order.getTimeStamp(),true);
+            Order order = Active[i];
+            displayText("Ordre nr: " + (i+1) + " - " + order.getTimeStamp(),true);
             for (Product product : order.getList())
             {
                 displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
             }
             displayText("");
         }
+        displayText("SELECT ORDER NR. TO COMPLETE ORDER");
         displayText();
     }
 

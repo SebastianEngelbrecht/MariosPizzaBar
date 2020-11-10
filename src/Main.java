@@ -127,7 +127,6 @@ public class Main {
                 break;
 
             case 4:
-                showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
                 ActiveOrder();
                 break;
 
@@ -246,6 +245,7 @@ public class Main {
 
     public static void ActiveOrder()
     {
+        showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
         try
         {
             File active = new File("ActiveOrder.csv");
@@ -265,7 +265,14 @@ public class Main {
         if (choice == 0)
         {
             OrdreMenu();
-        } else
+        } else if (choice <= Active.size() + 1)
+        {
+            //Add function to save order in "completed.csv". 
+            //Text goes brrr
+            Active.remove(choice - 1);
+            ActiveOrder();
+        }
+        else
         {
             System.out.println("Error!");
             System.out.println("Cannot interpret input.");
