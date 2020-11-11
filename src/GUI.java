@@ -94,7 +94,6 @@ public class GUI {
             Scanner scanTheme = new Scanner(readTheme);
             while (scanTheme.hasNext()) {
                 content = scanTheme.nextLine();
-//                System.out.println(content);
                 if (content.toLowerCase().contains(theme.toLowerCase())) {
                     if (content.toLowerCase().contains(light)) {
                         if (content.toLowerCase().contains(enabled)) {
@@ -128,7 +127,6 @@ public class GUI {
 
             lines.close();
 
-//            System.out.println("Find and Replace done!!!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,7 +144,6 @@ public class GUI {
 
             lines.close();
 
-//            System.out.println("Find and Replace done!!!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -231,9 +228,6 @@ public class GUI {
         });
 
         lightTheme.addActionListener(e -> {
-
-//            themeDark = false;
-//            themeLight = true;
             updateThemeToLight();
             savedTheme();
             colorTheme();
@@ -244,16 +238,12 @@ public class GUI {
 
 
         darkTheme.addActionListener(e -> {
-
-//            themeLight = false;
-//            themeDark = true;
             updateThemeToDark();
             savedTheme();
             colorTheme();
             centerPanelLeft.setText("");
             centerPanelRight.setText("");
         });
-
 
         fileMenu.add(exitItem);
         fileMenu.setForeground(fileMenuTextColor);
@@ -279,7 +269,6 @@ public class GUI {
 
         frame.setTitle("Mario's Pizzabar");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setResizable(false);
         frame.setIconImage(marioIcon.getImage());
         frame.add(mainPanel);
         frame.pack();
