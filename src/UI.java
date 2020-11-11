@@ -226,18 +226,6 @@ public class UI {
         System.out.println(result);
     }
 
-    public static void displayText(int nr, String text, char between) {
-        String result = "|";
-        text = nr + ". " + text;
-
-        int toAdd = ((lineCount - text.length()) / 2);
-
-        int i = 0;
-        for (i = 0; i < toAdd; i++)
-            result += between;
-
-        result += text;
-    }
     public static void displayText(int nr, String text, boolean state){
         String result = "|";
         text = nr + ". " + text;

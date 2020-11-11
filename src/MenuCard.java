@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class MenuCard {
 
     private static ArrayList<Product> productsList = new ArrayList<>();
-    private String dataCollection = "";
 
     public void loadCard() {
         try {
