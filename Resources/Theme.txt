@@ -1,2 +1,2 @@
-"Dark theme = true"
-"Light theme = false"
+"Dark theme = false"
+"Light theme = true"

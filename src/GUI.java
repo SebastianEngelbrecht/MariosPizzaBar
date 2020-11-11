@@ -6,7 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GUI {
 
@@ -49,6 +56,7 @@ public class GUI {
     private JButton quitButton = new JButton("5. QUIT");
     private JMenu fileMenu = new JMenu(" File ");
     private JMenu themeMenu = new JMenu(" Themes ");
+    private Path path = Paths.get("Theme.txt");
 
 
     public GUI() {
@@ -81,11 +89,11 @@ public class GUI {
         String dark = "dark";
         String enabled = "true";
         try {
-            FileReader readTheme = new FileReader("Theme.txt");
+            FileReader readTheme = new FileReader(String.valueOf(path));
             Scanner scanTheme = new Scanner(readTheme);
             while (scanTheme.hasNext()) {
                 content = scanTheme.nextLine();
-                System.out.println(content);
+//                System.out.println(content);
                 if (content.toLowerCase().contains(theme.toLowerCase())) {
                     if (content.toLowerCase().contains(light)) {
                         if (content.toLowerCase().contains(enabled)) {
@@ -104,6 +112,46 @@ public class GUI {
         } catch (
                 FileNotFoundException e) {
             System.out.println("File not found: " + e);
+        }
+    }
+
+    public void updateThemeToLight() {
+        try {
+
+            System.out.println(path.toAbsolutePath());
+            Stream<String> lines = Files.lines(path);
+            Stream<String> lines2 = Files.lines(path);
+
+            java.util.List<String> temp = lines.map(line -> line.replaceAll("Light theme = false", "Light theme = true")).collect(Collectors.toList());
+            Files.write(path, temp);
+            java.util.List<String> replaced = lines2.map(line -> line.replaceAll("Dark theme = true", "Dark theme = false")).collect(Collectors.toList());
+            Files.write(path, replaced);
+
+            lines.close();
+
+//            System.out.println("Find and Replace done!!!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateThemeToDark() {
+        try {
+
+            System.out.println(path.toAbsolutePath());
+            Stream<String> lines = Files.lines(path);
+            Stream<String> lines2 = Files.lines(path);
+
+            java.util.List<String> temp = lines.map(line -> line.replaceAll("Light theme = true", "Light theme = false")).collect(Collectors.toList());
+            Files.write(path, temp);
+            java.util.List<String> replaced = lines2.map(line -> line.replaceAll("Dark theme = false", "Dark theme = true")).collect(Collectors.toList());
+            Files.write(path, replaced);
+
+            lines.close();
+
+//            System.out.println("Find and Replace done!!!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -187,8 +235,10 @@ public class GUI {
 
         lightTheme.addActionListener(e -> {
 
-            themeDark = false;
-            themeLight = true;
+//            themeDark = false;
+//            themeLight = true;
+            updateThemeToLight();
+            savedTheme();
             colorTheme();
             centerPanelLeft.setText("");
             centerPanelRight.setText("");
@@ -198,8 +248,10 @@ public class GUI {
 
         darkTheme.addActionListener(e -> {
 
-            themeLight = false;
-            themeDark = true;
+//            themeLight = false;
+//            themeDark = true;
+            updateThemeToDark();
+            savedTheme();
             colorTheme();
             centerPanelLeft.setText("");
             centerPanelRight.setText("");

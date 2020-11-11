@@ -72,15 +72,16 @@ public class GUITest {
             Stream<String> lines = Files.lines(path);
             Stream<String> lines2 = Files.lines(path);
             Stream<String> lines3 = Files.lines(path);
+
             List<String> temp = lines.map(line -> line.replaceAll("true", "barxxd")).collect(Collectors.toList());
             Files.write(path, temp);
-
             List<String> replaced = lines2.map(line -> line.replaceAll("false", "true")).collect(Collectors.toList());
             Files.write(path, replaced);
-
             List<String> replaceTemp = lines3.map(line -> line.replaceAll("barxxd", "false")).collect(Collectors.toList());
             Files.write(path, replaceTemp);
+
             lines.close();
+
             System.out.println("Find and Replace done!!!");
         } catch (IOException e) {
             e.printStackTrace();
