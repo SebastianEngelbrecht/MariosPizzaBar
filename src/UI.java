@@ -24,7 +24,7 @@ public class UI {
         displayText();
     }
 
-    public void displayOrdreUI(){
+    public void displayOrderUI(){
         displayText();
         displayText("Select An Option");
         displayText(1, "ADD PIZZA", true);
