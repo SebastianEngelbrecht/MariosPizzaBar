@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static MenuCard menuCard;
     private static UI showMenu;
-    private static Order currentOrdre = null;
+    private static Order currentOrder = null;
     private static List <Order> Active = new ArrayList<>();
 
 
@@ -34,7 +34,7 @@ public class Main {
                 break;
 
             case 2:
-                OrdreMenu();
+                orderMenu();
                 break;
 
             case 3:
@@ -72,35 +72,35 @@ public class Main {
         }
     }
 
-    public static void OrdreMenu(){
-        if(currentOrdre == null) {
-            currentOrdre = new Order();
+    public static void orderMenu(){
+        if(currentOrder == null) {
+            currentOrder = new Order();
             System.out.println("Creating New Order");
         }
 
-        showMenu.displayOrdreUI();
+        showMenu.displayOrderUI();
 
         switch (showMenu.inputScanner())
         {
             case 1:
-                //Add Pizza to currentOrdre
+                //Add Pizza to currentOrder
                 selectToAdd();
                 break;
 
             case 2:
-                //Remove Pizza from currentOrdre
-                showMenu.displayCurrentOrder(currentOrdre);
+                //Remove Pizza from currentOrder
+                showMenu.displayCurrentOrder(currentOrder);
 
                 int choice = showMenu.inputScanner();
 
                 if (choice == 0)
                 {
-                    OrdreMenu();
+                    orderMenu();
                     break;
                 } else
                 {
-                    currentOrdre.removeOrder(choice, 1);
-                    OrdreMenu();
+                    currentOrder.removeOrder(choice, 1);
+                    orderMenu();
                 }
                 break;
 
@@ -116,11 +116,11 @@ public class Main {
 
                     case 2:
                         //Cancel Current Order (NO)
-                        OrdreMenu();
+                        orderMenu();
                         break;
 
                     default:
-                        OrdreMenu();
+                        orderMenu();
                         break;
                 }
                 break;
@@ -132,7 +132,7 @@ public class Main {
             case 5:
                 System.out.println("Canceling Order");
                 System.out.println("Returning to Start");
-                currentOrdre = null;
+                currentOrder = null;
                 StartMenu();
                 break;
 
@@ -140,7 +140,7 @@ public class Main {
                 System.out.println("Error!");
                 System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
-                OrdreMenu();
+                orderMenu();
                 break;
         }
     }
@@ -154,7 +154,8 @@ public class Main {
                 break;
 
             case 2:
-
+                System.out.println("Showing today's most popular pizza");
+                statisticsMenu();
                 break;
 
             case 3:
@@ -205,20 +206,22 @@ public class Main {
         }
     }
 
-    public static void maintenanceMenu() {
-        showMenu.displayMaintenanceUI();
+    public static void statisticsMenu()
+    {
+        showMenu.displayStatisticsUI(Oversight.LoadFromOversight());
 
-        switch (showMenu.inputScanner()) {
-            case 1:
-                System.out.println("Testing");
+        switch (showMenu.inputScanner())
+        {
+            case 0:
+                System.out.println("Returning to Start");
+                financesMenu();
                 break;
 
-            case 2:
-                System.out.println("Testing");
-                break;
-
-            case 3:
-                System.out.println("Going back to Menu");
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                statisticsMenu();
                 break;
         }
     }
@@ -229,11 +232,11 @@ public class Main {
 
         if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
         {
-            currentOrdre.addOrder(menuCard.getProductByIndex(choice));
-            OrdreMenu();
+            currentOrder.addOrder(menuCard.getProductByIndex(choice));
+            orderMenu();
         }
         else if(choice == 0)
-            OrdreMenu();
+            orderMenu();
         else
         {
             System.out.println("Error!");
@@ -252,17 +255,17 @@ public class Main {
             Date date = new Date(startTime);
 
             FileWriter file = new FileWriter("ActiveOrder.csv");
-            file.write(currentOrdre.toString() + " - " + formatter.format(date));
+            file.write(currentOrder.toString() + " - " + formatter.format(date));
             file.close();
-            currentOrdre.setTimeStamp(formatter.format(date));
-            Active.add(currentOrdre);
-            currentOrdre = null;
+            currentOrder.setTimeStamp(formatter.format(date));
+            Active.add(currentOrder);
+            currentOrder = null;
         } catch (Exception e)
         {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        OrdreMenu();
+        orderMenu();
     }
 
     public static void ActiveOrder()
@@ -282,7 +285,7 @@ public class Main {
 
         if (choice == 0)
         {
-            OrdreMenu();
+            orderMenu();
         } else if (choice <= Active.size() + 1)
         {
             Oversight.SaveToOversight(Active.get(choice - 1));

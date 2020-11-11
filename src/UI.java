@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class UI {
     private static int lineCount = 110;
@@ -24,14 +24,14 @@ public class UI {
         displayText();
     }
 
-    public void displayOrdreUI(){
+    public void displayOrderUI(){
         displayText();
         displayText("Select An Option");
         displayText(1, "ADD PIZZA", true);
         displayText(2, "REMOVE PIZZA", true);
         displayText(3, "FINISH ORDER", true);
         displayText(4, "ACTIVE ORDERS", true);
-        displayText(5, "CANCEL ORDER", true);
+        displayText(5, "BACK TO MENU", true);
         displayText();
     }
 
@@ -41,7 +41,7 @@ public class UI {
         displayText(1, "OVERSIGHT", true);
         displayText(2, "STATISTICS", true);
         displayText(3, "CALCULATE TURNOVER", true);
-        displayText(4, "GO BACK", true);
+        displayText(4, "BACK TO MENU", true);
         displayText();
     }
 
@@ -78,6 +78,39 @@ public class UI {
 
     }
 
+    public void displayStatisticsUI(Order[] input)
+    {
+        displayText();
+            displayText("MOST POPULAR PIZZA");
+        displayText();
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Order o: input) {
+            for (Product p: o.getList()) {
+                list.add(p.getIndex());
+            }
+        }
+
+        int mostCommon = -1, mostCount = 0, curCount = 0;
+        for(int i: list) {
+            curCount = 1;
+            for (int j: list) {
+                if(j == i)
+                    curCount++;
+            }
+
+            if(curCount > mostCount) {
+                mostCount = curCount;
+                mostCommon = i;
+            }
+        }
+        displayText(MenuCard.getProductByIndex(mostCommon).getName() + "");
+        displayText();
+        displayText(0, "BACK TO MAIN MENU",true);
+        displayText();
+    }
+
+
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");
@@ -107,15 +140,6 @@ public class UI {
             displayText("");
         }
         displayText("SELECT ORDER NR. TO COMPLETE ORDER");
-        displayText();
-    }
-
-    public void displayMaintenanceUI(){
-        displayText();
-        displayText("MAINTENANCE");
-        displayText();
-        displayText(1,"MAINTAIN TEST",true);
-        displayText(2,"MAINTAIN TEST",true);
         displayText();
     }
 
@@ -202,18 +226,6 @@ public class UI {
         System.out.println(result);
     }
 
-    public static void displayText(int nr, String text, char between) {
-        String result = "|";
-        text = nr + ". " + text;
-
-        int toAdd = ((lineCount - text.length()) / 2);
-
-        int i = 0;
-        for (i = 0; i < toAdd; i++)
-            result += between;
-
-        result += text;
-    }
     public static void displayText(int nr, String text, boolean state){
         String result = "|";
         text = nr + ". " + text;
