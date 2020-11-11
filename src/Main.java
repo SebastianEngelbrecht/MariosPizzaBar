@@ -40,10 +40,6 @@ public class Main {
                 break;
 
             case 4:
-                maintenanceMenu();
-                break;
-
-            case 5:
                 System.out.println("Ending Application");
                 System.out.println("Goodbye!");
                 break;
@@ -190,19 +186,19 @@ public class Main {
     }
 
     public static void turnoverMenu(){
-        showMenu.displayTurnoverUI(menuCard);
+        showMenu.displayTurnoverUI(Oversight.LoadFromOversight());
 
-        switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
-            case 1:
-                break;
-
-            case 2:
-                System.out.println("Calculating today's turnover");
-                break;
-
-            case 3:
+        switch (showMenu.inputScanner()){
+            case 0:
                 System.out.println("Returning to Start");
-                StartMenu();
+                financesMenu();
+                break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                turnoverMenu();
                 break;
         }
     }

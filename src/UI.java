@@ -9,8 +9,7 @@ public class UI {
         displayText(1,"MENU CARD",true);
         displayText(2,"ORDER",true);
         displayText(3,"FINANCES",true);
-        displayText(4,"MAINTENANCE",true);
-        displayText(5,"QUIT",true);
+        displayText(4,"QUIT",true);
         displayText();
     }
 
@@ -61,20 +60,20 @@ public class UI {
         displayText();
     }
 
-    public void displayTurnoverUI(MenuCard card){
-        Product[] list = card.getProductList();
-
+    public void displayTurnoverUI(Order[] input){
         displayText();
         displayText("TODAY'S TURNOVER");
         displayText();
 
-        for (int i = 0; i < card.getProductSize(); i++) {
-            displayText("ORDER " + (i) + ": " + list[i].getPrice() + " kr.", true);
+        for (Order o: input) {
+            for (Product p: o.getList()) {
+                displayText(p.getName(), p.getPrice() + "kr.");
+            }
         }
         displayText();
-        displayText("TOTAL: ",true);
+        displayText("TOTAL: " + Oversight.CalculateTurnOver(input),true);
         displayText();
-        displayText(3, "BACK TO MAIN MENU",true);
+        displayText(0, "BACK TO MAIN MENU",true);
         displayText();
 
     }

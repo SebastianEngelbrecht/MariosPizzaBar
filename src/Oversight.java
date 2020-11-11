@@ -61,7 +61,6 @@ public class Oversight {
     }
 
     public static Order[] LoadFromOversight() {
-        List<String> dataCollection = new ArrayList<>();
         List<Order> result = new ArrayList<>();
         try {
             File pizzaList = new File("oversight.csv");
@@ -92,5 +91,16 @@ public class Oversight {
 
 
         return result.toArray(new Order[result.size()]);
+    }
+
+    public static int CalculateTurnOver(Order[] input){
+        int result = 0;
+
+        for (Order o: input) {
+            for (Product p: o.getList())
+                result += p.getPrice();
+        }
+
+        return result;
     }
 }
