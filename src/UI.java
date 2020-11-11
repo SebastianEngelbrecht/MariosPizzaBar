@@ -31,7 +31,7 @@ public class UI {
         displayText(2, "REMOVE PIZZA", true);
         displayText(3, "FINISH ORDER", true);
         displayText(4, "ACTIVE ORDERS", true);
-        displayText(5, "CANCEL ORDER", true);
+        displayText(5, "BACK TO MENU", true);
         displayText();
     }
 
@@ -41,7 +41,7 @@ public class UI {
         displayText(1, "OVERSIGHT", true);
         displayText(2, "STATISTICS", true);
         displayText(3, "CALCULATE TURNOVER", true);
-        displayText(4, "GO BACK", true);
+        displayText(4, "BACK TO MENU", true);
         displayText();
     }
 
@@ -78,7 +78,7 @@ public class UI {
 
     }
 
-    public void displaystatisticsUI(Order[] input)
+    public void displayStatisticsUI(Order[] input)
     {
         displayText();
             displayText("MOST POPULAR PIZZA");

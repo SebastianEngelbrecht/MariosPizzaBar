@@ -205,7 +205,7 @@ public class Main {
 
     public static void statisticsMenu()
     {
-        showMenu.displaystatisticsUI(Oversight.LoadFromOversight());
+        showMenu.displayStatisticsUI(Oversight.LoadFromOversight());
 
         switch (showMenu.inputScanner())
         {
