@@ -12,6 +12,9 @@ public class Main {
 
 
     public static void main(String[] args) {
+        System.out.println("Starting Application");
+        System.out.println("Hello!");
+
         menuCard = new MenuCard();
         showMenu = new UI();
 
@@ -25,22 +28,18 @@ public class Main {
         switch (showMenu.inputScanner())
         {
             case 1:
-                System.out.println("Showing Menu Card");
                 MenuCard();
                 break;
 
             case 2:
-                System.out.println("Creating New Order");
                 OrdreMenu();
                 break;
 
             case 3:
-                System.out.println("Showing Finances");
                 financesMenu();
                 break;
 
             case 4:
-                System.out.println("Showing Maintenance");
                 maintenanceMenu();
                 break;
 
@@ -76,8 +75,10 @@ public class Main {
     }
 
     public static void OrdreMenu(){
-        if(currentOrdre == null)
+        if(currentOrdre == null) {
             currentOrdre = new Order();
+            System.out.println("Creating New Order");
+        }
 
         showMenu.displayOrdreUI();
 
@@ -205,7 +206,7 @@ public class Main {
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
 
-        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
+        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
         {
             currentOrdre.addOrder(menuCard.getProductByIndex(choice));
             OrdreMenu();
@@ -269,7 +270,7 @@ public class Main {
         } else if (choice <= Active.size() + 1)
         {
             //Add function to save order in "completed.csv".
-            Oversight.SaveToOversight(currentOrdre);
+            Oversight.SaveToOversight(Active.get(choice - 1));
             Active.remove(choice - 1);
             ActiveOrder();
         }

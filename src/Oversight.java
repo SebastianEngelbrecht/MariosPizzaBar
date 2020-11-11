@@ -17,7 +17,6 @@ public class Oversight {
                 System.out.println("File created: " + file.getName());
             file.setWritable(true);
 
-            System.out.println(file.getName());
 
             String saveString = "";
             Scanner scanner = new Scanner(file);
@@ -30,12 +29,15 @@ public class Oversight {
 
             if(input.getTimeStamp() == "")
             {
+                System.out.println("Adding Time");
                 long startTime = System.currentTimeMillis();
                 SimpleDateFormat formatter = new SimpleDateFormat("HH-mm-ss");
                 Date date = new Date(startTime);
 
                 input.setTimeStamp(formatter.format(date));
             }
+
+            System.out.println(input.getTimeStamp());
 
             saveString += "\n" + input.getTimeStamp() + "; ";
             Product[] products = input.getList();

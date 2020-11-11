@@ -39,9 +39,10 @@ public class UI {
     public void displayFinancesUI(){
         displayText();
         displayText("Finances");
-        displayText(1, "STATISTICS", true);
-        displayText(2, "CALCULATE TURNOVER", true);
-        displayText(3, "GO BACK", true);
+        displayText(1, "", true);
+        displayText(2, "STATISTICS", true);
+        displayText(3, "CALCULATE TURNOVER", true);
+        displayText(4, "GO BACK", true);
         displayText();
     }
 
@@ -245,18 +246,10 @@ public class UI {
 
     //endregion
 
-    public void displayLine(){
-        System.out.println("+------------------------------+");
-    }
-
     public int inputScanner(){
         Scanner inputScanner = new Scanner(System.in);
         int result = inputScanner.nextInt();
         System.out.println("YOU HAVE SELECTED: " + result);
         return result;
-    }
-
-    public void returnButton(){
-
     }
 }
