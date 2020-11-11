@@ -203,24 +203,6 @@ public class Main {
         }
     }
 
-    public static void maintenanceMenu() {
-        showMenu.displayMaintenanceUI();
-
-        switch (showMenu.inputScanner()) {
-            case 1:
-                System.out.println("Testing");
-                break;
-
-            case 2:
-                System.out.println("Testing");
-                break;
-
-            case 3:
-                System.out.println("Going back to Menu");
-                break;
-        }
-    }
-
     public static void selectToAdd(){
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
