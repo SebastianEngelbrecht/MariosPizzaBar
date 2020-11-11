@@ -1,21 +1,29 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuCard {
 
-    private ArrayList<Product> productsList = new ArrayList<>();
-    private String dataCollection;
+    private static ArrayList<Product> productsList = new ArrayList<>();
+    private String dataCollection = "";
 
     public void loadCard() {
         try {
             File pizzaList = new File("PizzaList.csv");
+
             Scanner myReader = new Scanner(pizzaList);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
+                if (data.charAt(1) != 'N') {
+                    String[] fromData = data.split(";");
 
-                if(data.charAt(0) != 'N')
-                    dataCollection += data + "//";
+                    if(fromData[0].charAt(0) == 'n')
+                        fromData[0] = fromData[0].split("null")[1];
+
+                    Product toAdd = new Product(fromData[0],fromData[1],fromData[2], fromData[3].charAt(0) + "" +fromData[3].charAt(1));
+                    productsList.add(toAdd);
+                }
             }
 
             myReader.close();
@@ -24,16 +32,39 @@ public class MenuCard {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
 
-        for (String data: dataCollection.split("//")) {
-            String[] fromData = data.split(";");
+    public boolean saveOrder(Order toSave){
+        try {
+            String fileName = "orders.csv";
+            String saveString = "";
 
-            if(fromData[0].charAt(0) == 'n')
-                fromData[0] = fromData[0].split("null")[1];
+            File file = new File(fileName);
 
-            Product toAdd = new Product(fromData[0],fromData[1],fromData[2],fromData[3]);
-            productsList.add(toAdd);
+            if (file.createNewFile())
+                System.out.println("File created: " + file.getName());
+
+            Scanner reader = new Scanner(file);
+            while (reader.hasNextLine()){
+                saveString += ("\n" + reader.nextLine());
+            }
+
+            saveString += "\n";
+            for (Product p: toSave.getList()) {
+                saveString += ";" + p.getIndex();
+            }
+
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(saveString);
+            writer.close();
+
+        }catch (Exception e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return false;
         }
+
+        return true;
     }
 
     public Product[] getProductList(){
@@ -49,7 +80,7 @@ public class MenuCard {
         return productsList.size();
     }
 
-    public Product getProductByIndex(int index){
+    public static Product getProductByIndex(int index){
         for (Product product: productsList) {
             if(product.getIndex() == index)
                 return product;

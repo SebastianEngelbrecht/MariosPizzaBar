@@ -9,8 +9,7 @@ public class UI {
         displayText(1,"MENU CARD",true);
         displayText(2,"ORDER",true);
         displayText(3,"FINANCES",true);
-        displayText(4,"MAINTENANCE",true);
-        displayText(5,"QUIT",true);
+        displayText(4,"QUIT",true);
         displayText();
     }
 
@@ -36,6 +35,49 @@ public class UI {
         displayText();
     }
 
+    public void displayFinancesUI(){
+        displayText();
+        displayText("Finances");
+        displayText(1, "OVERSIGHT", true);
+        displayText(2, "STATISTICS", true);
+        displayText(3, "CALCULATE TURNOVER", true);
+        displayText(4, "GO BACK", true);
+        displayText();
+    }
+
+    public void displayOversight(Order[] toShow){
+        displayText();
+        displayText("Oversight");
+        displayText(0, "Return", true);
+        displayText("");
+        for (Order o: toShow) {
+            displayText(o.getTimeStamp(), true);
+            for (Product p: o.getList()) {
+                displayText(p.getIndex() + ". " + p.getName() + " -- " + p.getDescription(), p.getPrice() + "kr.");
+            }
+            displayText("");
+        }
+        displayText();
+    }
+
+    public void displayTurnoverUI(Order[] input){
+        displayText();
+        displayText("TODAY'S TURNOVER");
+        displayText();
+
+        for (Order o: input) {
+            for (Product p: o.getList()) {
+                displayText(p.getName(), p.getPrice() + "kr.");
+            }
+        }
+        displayText();
+        displayText("TOTAL: " + Oversight.CalculateTurnOver(input),true);
+        displayText();
+        displayText(0, "BACK TO MAIN MENU",true);
+        displayText();
+
+    }
+
     public void displayCurrentOrder(Order currentOrder){
         displayText();
         displayText("CURRENT ORDER");
@@ -54,30 +96,26 @@ public class UI {
         displayText();
         displayText("ACTIVE ORDERS");
         displayText(0, "RETURN");
+        for (int i = 0; i < Active.length; i++)
+        {
+            Order order = Active[i];
+            displayText("Ordre nr: " + (i+1) + " - " + order.getTimeStamp(),true);
+            for (Product product : order.getList())
+            {
+                displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+            }
+            displayText("");
+        }
+        displayText("SELECT ORDER NR. TO COMPLETE ORDER");
+        displayText();
+    }
 
-
-//        for (Product product: Active.getList())
-//        {
-//            displayText(product.getName() + product.getDescription());
-//        }
-
-
-
-//        if (Active.length != 0)
-//        {
-//            for (Order o : Active)
-//            {
-//                float totalPrice = 0;
-//                for (Product product : o.getList())
-//                {
-//                    displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
-//                    totalPrice += product.getPrice();
-//                }
-//
-//                displayText(totalPrice + "kr.");
-//            }
-//        }
-
+    public void displayMaintenanceUI(){
+        displayText();
+        displayText("MAINTENANCE");
+        displayText();
+        displayText(1,"MAINTAIN TEST",true);
+        displayText(2,"MAINTAIN TEST",true);
         displayText();
     }
 
@@ -222,18 +260,10 @@ public class UI {
 
     //endregion
 
-    public void displayLine(){
-        System.out.println("+------------------------------+");
-    }
-
     public int inputScanner(){
         Scanner inputScanner = new Scanner(System.in);
         int result = inputScanner.nextInt();
         System.out.println("YOU HAVE SELECTED: " + result);
         return result;
-    }
-
-    public void returnButton(){
-
     }
 }

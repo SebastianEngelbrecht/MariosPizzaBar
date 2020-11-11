@@ -1,0 +1,31 @@
+﻿Number;Name;Ingredients;Price
+1;Margherita;tomat, ost;57,-
+2;Vesuvio;tomat, ost, skinke;66,-
+3;Capricciosa;tomat, ost, skinke, champignon;68,-
+4;Calzone (indbagt);tomat, ost, skinke, champignon;68,-
+5;Quattro Stagioni;tomat, ost, skinke, champignon, rejer, paprika;74,-
+6;Marinara;tomat, ost, tun, rejer, muslinger, hvidløg;74,-
+7;Vegetariana;tomat, ost, blandet grøntsager;72,-
+8;Italiana;tomat, ost, løg, kødsauce;67,-
+9;Gorgonzola;tomat, ost, champignon, løg, gorgonzola;73,-
+10;Salat Pizza;tomat, ost, salat, tomater, agurk og creme fraiche;74,-
+11;Napoli;tomat, ost, ansjoser, oliven, kapers;70,-
+12;Vinchiga (stærk);tomat, ost, skinke, champignon, paprika, hvidløg, chili;72,-
+13;Napoletana;tomat, ost, skinke, pepproni;70,-
+14;Hawaii;tomat, ost, skinke, ananas;70,-
+15;Pepo Italiano;tomat, ost, pepperoni, kødsauce, paprika, løg, chili, hvidløg;76,-
+16;Sardegna;tomat, ost, cocktailpølser, bacon, løg, æg;74,-
+17;Romana;tomat, ost, skinke, bacon, løg;72,-
+18;Sole;tomat, ost, skinke, bacon, æg;72,-
+19;Costa Smeralda;tomat, ost, gorgonzola, rejer, asparges, parmaskinke;79,-
+20;La Salami;tomat, ost, skinke, salami;72,-
+21;Rocco;tomat, ost, kødstrimler, løg, paprika, chili, hvidløg;74,-
+22;Marco;tomat, ost, skinke, champignon, kødstrimler, løg;75,-
+23;Kokkode;tomat, ost, cherrytomater, kyllingefilet, ærter, pancetta (italiensk bacon);76,-
+24;Antonello;tomat, ost, skinke, kødsauce, cocktailpølser, løg;76,-
+25;Pasqualino;tomat, ost, pepperoni, ananas;70,-
+26;Felix;tomat, ost, pepperoni;68,-
+27;Parma Special;tomat, ost, parmaskinke, rucola, pesto, parmigiano;82,-
+28;Ventricina Special;mascarpone, ost, stærk salami, rucola, pesto, parmigiano;82,-
+29;Margherita Special;mascarpone, mozarella, cherry tomater, pesto, basilikum;79,-
+30;4 Formaggi;gorgonzola, mozarella, fontina, parmigiano;81,-

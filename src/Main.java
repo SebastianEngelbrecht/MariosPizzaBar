@@ -7,12 +7,18 @@ public class Main {
     private static MenuCard menuCard;
     private static UI showMenu;
     private static Order currentOrdre = null;
-    private static Order[] Active = new Order[0];
+    private static List <Order> Active = new ArrayList<>();
 
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         GUI myGui = new GUI();
         myGui.show();
+=======
+        System.out.println("Starting Application");
+        System.out.println("Hello!");
+
+>>>>>>> master
         menuCard = new MenuCard();
         showMenu = new UI();
 
@@ -27,22 +33,18 @@ public class Main {
         switch (showMenu.inputScanner())
         {
             case 1:
-                System.out.println("Showing Menu Card");
                 MenuCard();
                 break;
 
             case 2:
-                System.out.println("Creating New Order");
                 OrdreMenu();
                 break;
 
             case 3:
+                financesMenu();
                 break;
 
             case 4:
-                break;
-
-            case 5:
                 System.out.println("Ending Application");
                 System.out.println("Goodbye!");
                 break;
@@ -74,20 +76,22 @@ public class Main {
     }
 
     public static void OrdreMenu(){
-        if(currentOrdre == null)
+        if(currentOrdre == null) {
             currentOrdre = new Order();
+            System.out.println("Creating New Order");
+        }
 
         showMenu.displayOrdreUI();
 
         switch (showMenu.inputScanner())
         {
             case 1:
-                //Add to Pizza
+                //Add Pizza to currentOrdre
                 selectToAdd();
                 break;
 
             case 2:
-                //Remove from Pizza
+                //Remove Pizza from currentOrdre
                 showMenu.displayCurrentOrder(currentOrdre);
 
                 int choice = showMenu.inputScanner();
@@ -125,7 +129,6 @@ public class Main {
                 break;
 
             case 4:
-                showMenu.displayActiveOrder(Active);
                 ActiveOrder();
                 break;
 
@@ -145,11 +148,89 @@ public class Main {
         }
     }
 
-    public static void selectToAdd() {
+    public static void financesMenu(){
+        showMenu.displayFinancesUI();
+
+        switch (showMenu.inputScanner()){
+            case 1:
+                oversightMenu();
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
+                System.out.println("Calculating today's turnover");
+                turnoverMenu();
+                break;
+
+            case 4:
+                System.out.println("Returning to Start");
+                StartMenu();
+                break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                financesMenu();
+                break;
+        }
+    }
+
+    public static void oversightMenu(){
+        showMenu.displayOversight(Oversight.LoadFromOversight());
+
+        int choice = showMenu.inputScanner();
+
+        if(choice == 0)
+            financesMenu();
+        else
+            oversightMenu();
+    }
+
+    public static void turnoverMenu(){
+        showMenu.displayTurnoverUI(Oversight.LoadFromOversight());
+
+        switch (showMenu.inputScanner()){
+            case 0:
+                System.out.println("Returning to Start");
+                financesMenu();
+                break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                turnoverMenu();
+                break;
+        }
+    }
+
+    public static void maintenanceMenu() {
+        showMenu.displayMaintenanceUI();
+
+        switch (showMenu.inputScanner()) {
+            case 1:
+                System.out.println("Testing");
+                break;
+
+            case 2:
+                System.out.println("Testing");
+                break;
+
+            case 3:
+                System.out.println("Going back to Menu");
+                break;
+        }
+    }
+
+    public static void selectToAdd(){
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
 
-        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
+        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
         {
             currentOrdre.addOrder(menuCard.getProductByIndex(choice));
             OrdreMenu();
@@ -176,6 +257,9 @@ public class Main {
             FileWriter file = new FileWriter("ActiveOrder.csv");
             file.write(currentOrdre.toString() + " - " + formatter.format(date));
             file.close();
+            currentOrdre.setTimeStamp(formatter.format(date));
+            Active.add(currentOrdre);
+            currentOrdre = null;
         } catch (Exception e)
         {
             System.out.println("An error occurred.");
@@ -186,15 +270,11 @@ public class Main {
 
     public static void ActiveOrder()
     {
+        showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
         try
         {
             File active = new File("ActiveOrder.csv");
             Scanner activeScanner = new Scanner(active);
-            while (activeScanner.hasNextLine())
-            {
-                String data = activeScanner.nextLine();
-                System.out.println(data);
-            }
             activeScanner.close();
         } catch (Exception e)
         {
@@ -206,7 +286,13 @@ public class Main {
         if (choice == 0)
         {
             OrdreMenu();
-        } else
+        } else if (choice <= Active.size() + 1)
+        {
+            Oversight.SaveToOversight(Active.get(choice - 1));
+            Active.remove(choice - 1);
+            ActiveOrder();
+        }
+        else
         {
             System.out.println("Error!");
             System.out.println("Cannot interpret input.");
