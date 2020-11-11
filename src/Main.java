@@ -47,6 +47,7 @@ public class Main {
             case 4:
                 System.out.println("Ending Application");
                 System.out.println("Goodbye!");
+                System.exit(0);
                 break;
 
             default:
