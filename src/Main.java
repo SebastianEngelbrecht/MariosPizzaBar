@@ -85,12 +85,12 @@ public class Main {
         switch (showMenu.inputScanner())
         {
             case 1:
-                //Add to Pizza
+                //Add Pizza to currentOrdre
                 selectToAdd();
                 break;
 
             case 2:
-                //Remove from Pizza
+                //Remove Pizza from currentOrdre
                 showMenu.displayCurrentOrder(currentOrdre);
 
                 int choice = showMenu.inputScanner();
@@ -251,11 +251,6 @@ public class Main {
         {
             File active = new File("ActiveOrder.csv");
             Scanner activeScanner = new Scanner(active);
-//            I think this while loop is redundant -->
-//            while (activeScanner.hasNextLine())
-//            {
-//                String data = activeScanner.nextLine();
-//            }
             activeScanner.close();
         } catch (Exception e)
         {
@@ -269,7 +264,6 @@ public class Main {
             OrdreMenu();
         } else if (choice <= Active.size() + 1)
         {
-            //Add function to save order in "completed.csv".
             Oversight.SaveToOversight(Active.get(choice - 1));
             Active.remove(choice - 1);
             ActiveOrder();
