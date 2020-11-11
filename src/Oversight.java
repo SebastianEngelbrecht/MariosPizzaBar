@@ -16,9 +16,6 @@ public class Oversight {
             if (file.createNewFile())
                 System.out.println("File created: " + file.getName());
             file.setWritable(true);
-
-            System.out.println(file.getName());
-
             String saveString = "";
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
