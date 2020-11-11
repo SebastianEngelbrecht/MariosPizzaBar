@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MenuCard {
 
     private static ArrayList<Product> productsList = new ArrayList<>();
-    private static final Path pizzaListFile = Paths.get("PizzaList.csv");
+    private static final Path pizzaListFile = Paths.get("Resources","PizzaList.csv");
 
     public void loadCard() {
         try {
@@ -34,39 +34,6 @@ public class MenuCard {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
-
-    public boolean saveOrder(Order toSave){
-        try {
-            String fileName = "orders.csv";
-            String saveString = "";
-
-            File file = new File(fileName);
-
-            if (file.createNewFile())
-                System.out.println("File created: " + file.getName());
-
-            Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()){
-                saveString += ("\n" + reader.nextLine());
-            }
-
-            saveString += "\n";
-            for (Product p: toSave.getList()) {
-                saveString += ";" + p.getIndex();
-            }
-
-            FileWriter writer = new FileWriter(fileName);
-            writer.write(saveString);
-            writer.close();
-
-        }catch (Exception e){
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
     }
 
     public Product[] getProductList(){

@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Scanner;
@@ -8,6 +10,7 @@ public class Main {
     private static UI showMenu;
     private static Order currentOrder = null;
     private static List <Order> Active = new ArrayList<>();
+    private static final Path activeOrderFileLocation = Paths.get("Resources", "ActiveOrder.csv");
 
 
     public static void main(String[] args) {
@@ -254,7 +257,7 @@ public class Main {
             SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
             Date date = new Date(startTime);
 
-            FileWriter file = new FileWriter("ActiveOrder.csv");
+            FileWriter file = new FileWriter(String.valueOf(activeOrderFileLocation));
             file.write(currentOrder.toString() + " - " + formatter.format(date));
             file.close();
             currentOrder.setTimeStamp(formatter.format(date));
@@ -273,7 +276,7 @@ public class Main {
         showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
         try
         {
-            File active = new File("ActiveOrder.csv");
+            File active = new File(String.valueOf(activeOrderFileLocation));
             Scanner activeScanner = new Scanner(active);
             activeScanner.close();
         } catch (Exception e)

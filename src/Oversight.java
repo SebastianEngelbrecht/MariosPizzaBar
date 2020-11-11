@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,9 +11,12 @@ import static java.lang.Integer.parseInt;
 
 
 public class Oversight {
+
+    private static final Path oversightFileLocation = Paths.get("Resources", "oversight.csv");
+
     public static boolean SaveToOversight(Order input) {
         try {
-            File file = new File("oversight.csv");
+            File file = new File(String.valueOf(oversightFileLocation));
 
             if (file.createNewFile())
                 System.out.println("File created: " + file.getName());
@@ -63,7 +68,7 @@ public class Oversight {
     public static Order[] LoadFromOversight() {
         List<Order> result = new ArrayList<>();
         try {
-            File pizzaList = new File("oversight.csv");
+            File pizzaList = new File(String.valueOf(oversightFileLocation));
             Scanner myReader = new Scanner(pizzaList);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
