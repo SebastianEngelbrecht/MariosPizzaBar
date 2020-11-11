@@ -205,7 +205,7 @@ public class Main {
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
 
-        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize() - 1).getIndex())
+        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
         {
             currentOrdre.addOrder(menuCard.getProductByIndex(choice));
             OrdreMenu();
