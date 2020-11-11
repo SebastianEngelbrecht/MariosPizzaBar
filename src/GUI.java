@@ -10,17 +10,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GUI {
 
+    private Path marioImageIcon = Paths.get("Resources","Mario_Icon.png");
+    private Path path = Paths.get("Resources","Theme.txt");
     private JFrame frame = new JFrame();
     private JLabel headerLabel = new JLabel();
-    private ImageIcon marioIcon = new ImageIcon("Mario_Icon.png");
     private JPanel buttons = new JPanel();
+    private ImageIcon marioIcon = new ImageIcon(String.valueOf(marioImageIcon));
     private JPanel mainPanel = new JPanel(new BorderLayout());
     private JPanel leftPanel = new JPanel();
     private JPanel rightPanel = new JPanel();
@@ -32,7 +33,7 @@ public class GUI {
     private BorderLayout mainPanelLayoutManager = new BorderLayout(0, 0);
     private BorderLayout centerPanelLayoutManager = new BorderLayout();
     private GridLayout buttonsLayoutManager = new GridLayout(9, 1, 0, 5);
-    private static MenuCard menuCard;
+    private static MenuCard guiMenuCard;
     private static Product[] list = null;
     private Color mainColor = Color.white;
     private Color centerPanelTextColor;
@@ -56,13 +57,13 @@ public class GUI {
     private JButton quitButton = new JButton("5. QUIT");
     private JMenu fileMenu = new JMenu(" File ");
     private JMenu themeMenu = new JMenu(" Themes ");
-    private Path path = Paths.get("Theme.txt");
+
 
 
     public GUI() {
-        menuCard = new MenuCard();
-        menuCard.loadCard();
-        list = menuCard.getProductList();
+        guiMenuCard = Main.menuCard;
+
+        list = guiMenuCard.getProductList();
         lookAndFeel();
         savedTheme();
         menuSetup();
@@ -416,11 +417,11 @@ public class GUI {
             centerPanelRight.setText("");
             String rightResult = "";
 
-            for (int i = 0; i < menuCard.getProductSize(); i++) {
+            for (int i = 0; i < guiMenuCard.getProductSize(); i++) {
                 leftLine = ((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription());
                 leftResult += leftLine + "\n";
             }
-            for (int i = 0; i < menuCard.getProductSize(); i++) {
+            for (int i = 0; i < guiMenuCard.getProductSize(); i++) {
                 rightLine = ((list[i].getPrice() + "kr."));
                 rightResult += rightLine + "\n";
             }

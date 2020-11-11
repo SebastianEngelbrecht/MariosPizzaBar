@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,15 +9,17 @@ public class MenuCard {
 
     private static ArrayList<Product> productsList = new ArrayList<>();
     private String dataCollection = "";
+    private static final Path pizzaListFile = Paths.get("PizzaList.csv");
 
     public void loadCard() {
         try {
-            File pizzaList = new File("PizzaList.csv");
+            File pizzaList = new File(String.valueOf(pizzaListFile));
 
             Scanner myReader = new Scanner(pizzaList);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if (data.charAt(1) != 'N') {
+                if (data.charAt(0) != 'N') {
+
                     String[] fromData = data.split(";");
 
                     if(fromData[0].charAt(0) == 'n')

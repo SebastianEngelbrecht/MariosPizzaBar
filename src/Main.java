@@ -4,26 +4,23 @@ import java.util.*;
 import java.util.Scanner;
 
 public class Main {
-    private static MenuCard menuCard;
+    public static MenuCard menuCard;
     private static UI showMenu;
     private static Order currentOrdre = null;
     private static List <Order> Active = new ArrayList<>();
 
 
     public static void main(String[] args) {
-<<<<<<< HEAD
-        GUI myGui = new GUI();
-        myGui.show();
-=======
+
         System.out.println("Starting Application");
         System.out.println("Hello!");
-
->>>>>>> master
         menuCard = new MenuCard();
         showMenu = new UI();
-
         menuCard.loadCard();
+        GUI myGui = new GUI();
+        myGui.show();
         StartMenu();
+
 
     }
 

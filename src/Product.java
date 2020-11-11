@@ -11,7 +11,7 @@ public class Product {
         this.index = parseInt(index);
         this.name = name;
         this.description = description;
-        this.price = parseFloat(price);
+        this.price = parseFloat(price) *-1;
     }
 
     //region Getters
