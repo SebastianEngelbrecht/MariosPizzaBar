@@ -118,8 +118,6 @@ public class GUI {
 
     public void updateThemeToLight() {
         try {
-
-            System.out.println(path.toAbsolutePath());
             Stream<String> lines = Files.lines(path);
             Stream<String> lines2 = Files.lines(path);
 
@@ -138,8 +136,6 @@ public class GUI {
 
     public void updateThemeToDark() {
         try {
-
-            System.out.println(path.toAbsolutePath());
             Stream<String> lines = Files.lines(path);
             Stream<String> lines2 = Files.lines(path);
 
@@ -416,7 +412,7 @@ public class GUI {
             centerPanelRight.setEditable(true);
             centerPanelRight.setText("");
             String rightResult = "";
-
+            list = guiMenuCard.getProductList();
             for (int i = 0; i < guiMenuCard.getProductSize(); i++) {
                 leftLine = ((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription());
                 leftResult += leftLine + "\n";

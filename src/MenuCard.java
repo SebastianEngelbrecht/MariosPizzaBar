@@ -15,15 +15,14 @@ public class MenuCard {
             File pizzaList = new File(String.valueOf(pizzaListFile));
 
             Scanner myReader = new Scanner(pizzaList);
+            myReader.nextLine();
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if (data.charAt(0) != 'N') {
-
                     String[] fromData = data.split(";");
 
                     if(fromData[0].charAt(0) == 'n')
                         fromData[0] = fromData[0].split("null")[1];
-
                     Product toAdd = new Product(fromData[0],fromData[1],fromData[2], fromData[3].charAt(0) + "" +fromData[3].charAt(1));
                     productsList.add(toAdd);
                 }
