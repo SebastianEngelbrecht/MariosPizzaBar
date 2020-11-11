@@ -152,7 +152,8 @@ public class Main {
                 break;
 
             case 2:
-
+                System.out.println("Showing today's most popular pizza");
+                statisticsMenu();
                 break;
 
             case 3:
@@ -199,6 +200,26 @@ public class Main {
                 System.out.println("Cannot interpret input.");
                 System.out.println("Try again.");
                 turnoverMenu();
+                break;
+        }
+    }
+
+    public static void statisticsMenu()
+    {
+        showMenu.displaystatisticsUI(Oversight.LoadFromOversight());
+
+        switch (showMenu.inputScanner())
+        {
+            case 0:
+                System.out.println("Returning to Start");
+                financesMenu();
+                break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                statisticsMenu();
                 break;
         }
     }

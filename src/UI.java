@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class UI {
     private static int lineCount = 110;
@@ -77,6 +77,39 @@ public class UI {
         displayText();
 
     }
+
+    public void displaystatisticsUI(Order[] input)
+    {
+        displayText();
+            displayText("MOST POPULAR PIZZA");
+        displayText();
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Order o: input) {
+            for (Product p: o.getList()) {
+                list.add(p.getIndex());
+            }
+        }
+
+        int mostCommon = -1, mostCount = 0, curCount = 0;
+        for(int i: list) {
+            curCount = 1;
+            for (int j: list) {
+                if(j == i)
+                    curCount++;
+            }
+
+            if(curCount > mostCount) {
+                mostCount = curCount;
+                mostCommon = i;
+            }
+        }
+        displayText(MenuCard.getProductByIndex(mostCommon).getName() + "");
+        displayText();
+        displayText(0, "BACK TO MAIN MENU",true);
+        displayText();
+    }
+
 
     public void displayCurrentOrder(Order currentOrder){
         displayText();
