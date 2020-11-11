@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class MenuCard {
 
     private static ArrayList<Product> productsList = new ArrayList<>();
-    private String dataCollection = "";
     private static final Path pizzaListFile = Paths.get("PizzaList.csv");
 
     public void loadCard() {
