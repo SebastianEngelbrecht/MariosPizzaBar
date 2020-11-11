@@ -75,7 +75,9 @@ public class Oversight {
                             Order toAdd = new Order();
                             toAdd.setTimeStamp(dataSplit[0]);
                             for(String intText: dataSplit[1].split(",")){
-                                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText.charAt(intText.length() - 1)+"")));
+                                String[] splitText = intText.split(" ");
+                                intText = splitText[splitText.length - 1];
+                                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText)));
                             }
 
                             result.add(toAdd);
