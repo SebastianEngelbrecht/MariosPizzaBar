@@ -64,36 +64,32 @@ public class Oversight {
         List<String> dataCollection = new ArrayList<>();
         List<Order> result = new ArrayList<>();
         try {
-            File pizzaList = new File("oversight.cvs");
+            File pizzaList = new File("oversight.csv");
             Scanner myReader = new Scanner(pizzaList);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if(data.length() > 0) {
                     if (data.charAt(0) != 'M') {
-                        if (data.charAt(0) != 'N')
-                            dataCollection.add(data);
+                        if (data.charAt(0) != 'N') {
+                            String[] dataSplit = data.split(";");
+
+                            Order toAdd = new Order();
+                            toAdd.setTimeStamp(dataSplit[0]);
+                            for(String intText: dataSplit[1].split(",")){
+                                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText.charAt(intText.length() - 1)+"")));
+                            }
+
+                            result.add(toAdd);
+                        }
                     }
                 }
             }
             myReader.close();
-
         } catch (Exception e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
-        for (String s: dataCollection) {
-            Order toAdd = new Order();
-
-            String[] data = s.split(";");
-            toAdd.setTimeStamp(data[0]);
-
-            for(String intText: data[1].split(",")){
-                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText.charAt(intText.length() - 1)+"")));
-            }
-        }
-
-        System.out.println(result);
 
         return result.toArray(new Order[result.size()]);
     }

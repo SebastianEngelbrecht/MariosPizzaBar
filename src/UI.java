@@ -39,10 +39,25 @@ public class UI {
     public void displayFinancesUI(){
         displayText();
         displayText("Finances");
-        displayText(1, "", true);
+        displayText(1, "OVERSIGHT", true);
         displayText(2, "STATISTICS", true);
         displayText(3, "CALCULATE TURNOVER", true);
         displayText(4, "GO BACK", true);
+        displayText();
+    }
+
+    public void displayOversight(Order[] toShow){
+        displayText();
+        displayText("Oversight");
+        displayText(0, "Return", true);
+        displayText("");
+        for (Order o: toShow) {
+            displayText(o.getTimeStamp(), true);
+            for (Product p: o.getList()) {
+                displayText(p.getIndex() + ". " + p.getName() + " -- " + p.getDescription(), p.getPrice() + "kr.");
+            }
+            displayText("");
+        }
         displayText();
     }
 

@@ -150,20 +150,43 @@ public class Main {
     public static void financesMenu(){
         showMenu.displayFinancesUI();
 
-        switch ((int)Mathf.Clamp(showMenu.inputScanner(),0,3)){
+        switch (showMenu.inputScanner()){
             case 1:
+                oversightMenu();
                 break;
 
             case 2:
+
+                break;
+
+            case 3:
                 System.out.println("Calculating today's turnover");
                 turnoverMenu();
                 break;
 
-            case 3:
+            case 4:
                 System.out.println("Returning to Start");
                 StartMenu();
                 break;
+
+            default:
+                System.out.println("Error!");
+                System.out.println("Cannot interpret input.");
+                System.out.println("Try again.");
+                financesMenu();
+                break;
         }
+    }
+
+    public static void oversightMenu(){
+        showMenu.displayOversight(Oversight.LoadFromOversight());
+
+        int choice = showMenu.inputScanner();
+
+        if(choice == 0)
+            financesMenu();
+        else
+            oversightMenu();
     }
 
     public static void turnoverMenu(){
