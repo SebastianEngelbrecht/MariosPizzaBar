@@ -1,10 +1,12 @@
-package JDBC;
+package jdbc;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class JDBC_DB_Connection implements AutoCloseable {
 
+    private Connection connection;
     private String db_url;
     private String db_user;
     private String db_password;
@@ -17,7 +19,6 @@ public class JDBC_DB_Connection implements AutoCloseable {
     private PreparedStatement ps_create_orderList;
     private PreparedStatement ps_create_pizzaIngredients;
 
-    private Connection connection;
 
     public JDBC_DB_Connection(String db_url, String db_user, String db_password) throws SQLException {
         this.db_url = db_url;
@@ -31,48 +32,53 @@ public class JDBC_DB_Connection implements AutoCloseable {
         connection.close();
     }
 
-    public void getPizzaList() throws Exception
+    public ArrayList<JDBC_DB_PizzaList> getPizzaList() throws Exception
     {
+        ArrayList<JDBC_DB_PizzaList> result = new ArrayList<>();
+
         try (ResultSet rs = ps_get_pizzaList.executeQuery())
         {
-            while (rs.next())
-            {
-
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                float price = rs.getFloat(3);
+                result.add(new JDBC_DB_PizzaList(id, name, price));
             }
-        } catch (SQLException e)
+            return result;
+        }
+        catch (SQLException e)
         {
             throw new Exception(e);
         }
     }
 
-   /* public void getPizzaIngredients() throws Exception
-    {
-        try (ResultSet rs = ps_get_pizzaIngredients.executeQuery())
-        {
-            while (rs.next())
-            {
+//    public void getPizzaIngredients() throws Exception
+//    {
+//        try (ResultSet rs = ps_get_pizzaIngredients.executeQuery())
+//        {
+//            while (rs.next())
+//            {
+//
+//            }
+//        } catch (SQLException e)
+//        {
+//            throw new Exception(e);
+//        }
+//    }
 
-            }
-        } catch (SQLException e)
-        {
-            throw new Exception(e);
-        }
-    }*/
-
-    /*public void getOrderList() throws Exception
-    {
-        try (ResultSet rs = ps_get_orderList.executeQuery())
-        {
-            while (rs.next())
-            {
-
-            }
-        } catch (SQLException e)
-        {
-            throw new Exception(e);
-        }
-    }
-*/
+//    public void getOrderList() throws Exception
+//    {
+//        try (ResultSet rs = ps_get_orderList.executeQuery())
+//        {
+//            while (rs.next())
+//            {
+//
+//            }
+//        } catch (SQLException e)
+//        {
+//            throw new Exception(e);
+//        }
+//    }
     public void createPizzaList(String name, float price) throws Exception
     {
         ps_create_pizzaList.setString(1, name);
@@ -114,7 +120,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
     private void prepareConnection() throws SQLException
     {
         connection = DriverManager.getConnection(db_url, db_user, db_password);
-//        ps_get_pizzaList = connection.prepareStatement("");
+        ps_get_pizzaList = connection.prepareStatement("SELECT * FROM mariospizzabar.pizzalist");
 //        ps_get_pizzaIngredients = connection.prepareStatement("");
 //        ps_get_orderList = connection.prepareStatement("");
         ps_create_pizzaList = connection.prepareStatement("INSERT INTO mariospizzabar.pizzalist " +

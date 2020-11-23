@@ -1,4 +1,4 @@
-import JDBC.JDBC_DB_Connection;
+import jdbc.JDBC_DB_Connection;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Scanner;
+
+
 
 public class Main {
     public static MenuCard menuCard;
