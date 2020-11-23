@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         try (JDBC_DB_Connection connection = new JDBC_DB_Connection
-                ("jdbc:mysql://localhost/", Utilities.username(), Utilities.password()))
+                ("jdbc:mysql://localhost/?serverTimezone=UTC", Utilities.username(), Utilities.password()))
         {
             System.out.println("Starting Application");
             System.out.println("Hello!");

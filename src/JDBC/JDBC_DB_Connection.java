@@ -31,7 +31,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         connection.close();
     }
 
-    /*public void getPizzaList() throws Exception
+    public void getPizzaList() throws Exception
     {
         try (ResultSet rs = ps_get_pizzaList.executeQuery())
         {
@@ -43,7 +43,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         {
             throw new Exception(e);
         }
-    }*/
+    }
 
    /* public void getPizzaIngredients() throws Exception
     {
