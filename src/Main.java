@@ -20,8 +20,8 @@ public class Main {
         menuCard = new MenuCard();
         showMenu = new UI();
         menuCard.loadCard();
-        GUI myGui = new GUI();
-        myGui.show();
+//        GUI myGui = new GUI();
+//        myGui.show();
         StartMenu();
 
 
