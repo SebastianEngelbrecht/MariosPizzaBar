@@ -9,8 +9,13 @@ public class JDBC_DB_Connection implements AutoCloseable {
     private String db_user;
     private String db_password;
 
-    private PreparedStatement ps_get_all_cities_count;
-    private PreparedStatement ps_get_all_cities_above_5_mil;
+    private PreparedStatement ps_get_pizzaList;
+    private PreparedStatement ps_get_pizzaIngredients;
+    private PreparedStatement ps_get_orderList;
+
+    private PreparedStatement ps_create_pizzaList;
+    private PreparedStatement ps_create_orderList;
+    private PreparedStatement ps_create_pizzaIngredients;
 
     private Connection connection;
 
@@ -26,10 +31,95 @@ public class JDBC_DB_Connection implements AutoCloseable {
         connection.close();
     }
 
+    /*public void getPizzaList() throws Exception
+    {
+        try (ResultSet rs = ps_get_pizzaList.executeQuery())
+        {
+            while (rs.next())
+            {
+
+            }
+        } catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }*/
+
+   /* public void getPizzaIngredients() throws Exception
+    {
+        try (ResultSet rs = ps_get_pizzaIngredients.executeQuery())
+        {
+            while (rs.next())
+            {
+
+            }
+        } catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }*/
+
+    /*public void getOrderList() throws Exception
+    {
+        try (ResultSet rs = ps_get_orderList.executeQuery())
+        {
+            while (rs.next())
+            {
+
+            }
+        } catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+*/
+    public void createPizzaList(String name, float price) throws Exception
+    {
+        ps_create_pizzaList.setString(1, name);
+        ps_create_pizzaList.setFloat(2, price);
+        if (ps_create_pizzaList.executeUpdate() != 1)
+        {
+            throw new Exception("Could not create Pizza");
+        }
+    }
+
+   /* public void createPizzaIngredients() throws Exception
+    {
+        try (ResultSet rs = ps_create_pizzaIngredients.executeQuery())
+        {
+            while (rs.next())
+            {
+
+            }
+        } catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }*/
+
+    /*public void createOrderList() throws Exception
+    {
+        try (ResultSet rs = ps_create_orderList.executeQuery())
+        {
+            while (rs.next())
+            {
+
+            }
+        } catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }*/
+
     private void prepareConnection() throws SQLException
     {
         connection = DriverManager.getConnection(db_url, db_user, db_password);
-        ps_get_all_cities_count = connection.prepareStatement("SELECT COUNT(*) FROM world.city");
-        ps_get_all_cities_above_5_mil = connection.prepareStatement("SELECT * FROM world.city WHERE Population > 5000000");
+//        ps_get_pizzaList = connection.prepareStatement("");
+//        ps_get_pizzaIngredients = connection.prepareStatement("");
+//        ps_get_orderList = connection.prepareStatement("");
+        ps_create_pizzaList = connection.prepareStatement("INSERT INTO mariospizzabar.pizzalist " +
+                "(Name, Price) VALUES (?,?)");
+//        ps_create_orderList = connection.prepareStatement("");
+//        ps_create_pizzaIngredients = connection.prepareStatement("");
     }
 }
