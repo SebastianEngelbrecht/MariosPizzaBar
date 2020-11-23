@@ -1,3 +1,5 @@
+import JDBC.JDBC_DB_Connection;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,8 +15,11 @@ public class Main {
     private static final Path activeOrderFileLocation = Paths.get("Resources", "ActiveOrder.csv");
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        try (JDBC_DB_Connection connection = new JDBC_DB_Connection("jdbc:mysql://localhost/", Utilities.username(), Utilities.password()))
+        {
 
+        }
         System.out.println("Starting Application");
         System.out.println("Hello!");
         menuCard = new MenuCard();
