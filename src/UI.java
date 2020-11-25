@@ -1,3 +1,6 @@
+import jdbc.JDBC_DB_Connection;
+
+import java.sql.SQLException;
 import java.util.*;
 
 public class UI {
@@ -21,6 +24,19 @@ public class UI {
         displayText(0, "RETURN");
         for (int i = 0; i < card.getProductSize(); i++)
             displayText((1 + i) + " " + list[i].getName() + " -- " + list[i].getDescription(), list[i].getPrice() + "kr.");
+        displayText();
+    }
+
+    public void displayMenuUI(JDBC_DB_Connection connection) throws Exception {
+        displayText();
+        displayText("MENU CARD");
+        displayText(0, "RETURN");
+        try {
+            for (int i = 0; i < connection.getPizzaList().size(); i++)
+                displayText((connection.getPizzaList().get(i).getId()) + " " + connection.getPizzaList().get(i).getName(), connection.getPizzaList().get(i).getPrice() + "kr.");
+        }catch (SQLException e) {
+            throw new Exception(e);
+        }
         displayText();
     }
 

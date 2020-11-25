@@ -15,12 +15,13 @@ public class Main {
     private static Order currentOrder = null;
     private static List <Order> Active = new ArrayList<>();
     private static final Path activeOrderFileLocation = Paths.get("Resources", "ActiveOrder.csv");
-
+    private static JDBC_DB_Connection connection = null;
 
     public static void main(String[] args) throws Exception {
         try (JDBC_DB_Connection connection = new JDBC_DB_Connection
                 ("jdbc:mysql://localhost/?serverTimezone=UTC", Utilities.username(), Utilities.password()))
         {
+            Main.connection = connection;
             System.out.println("Starting Application");
             System.out.println("Hello!");
             menuCard = new MenuCard();
@@ -32,7 +33,7 @@ public class Main {
         }
     }
 
-    public static void StartMenu(){
+    public static void StartMenu() throws Exception {
         showMenu.displayStartUI();
 
         switch (showMenu.inputScanner())
@@ -64,9 +65,9 @@ public class Main {
         }
     }
 
-    public static void MenuCard(){
-        showMenu.displayMenuUI(menuCard);
-
+    public static void MenuCard() throws Exception {
+//        showMenu.displayMenuUI(menuCard);
+        showMenu.displayMenuUI(connection);
         if (showMenu.inputScanner() == 0) {
             System.out.println("Returning to Start");
             StartMenu();
@@ -81,7 +82,7 @@ public class Main {
         }
     }
 
-    public static void orderMenu(){
+    public static void orderMenu() throws Exception {
         if(currentOrder == null) {
             currentOrder = new Order();
             System.out.println("Creating New Order");
@@ -154,7 +155,7 @@ public class Main {
         }
     }
 
-    public static void financesMenu(){
+    public static void financesMenu() throws Exception {
         showMenu.displayFinancesUI();
 
         switch (showMenu.inputScanner()){
@@ -186,7 +187,7 @@ public class Main {
         }
     }
 
-    public static void oversightMenu(){
+    public static void oversightMenu() throws Exception {
         showMenu.displayOversight(Oversight.LoadFromOversight());
 
         int choice = showMenu.inputScanner();
@@ -197,7 +198,7 @@ public class Main {
             oversightMenu();
     }
 
-    public static void turnoverMenu(){
+    public static void turnoverMenu() throws Exception {
         showMenu.displayTurnoverUI(Oversight.LoadFromOversight());
 
         switch (showMenu.inputScanner()){
@@ -215,8 +216,7 @@ public class Main {
         }
     }
 
-    public static void statisticsMenu()
-    {
+    public static void statisticsMenu() throws Exception {
         showMenu.displayStatisticsUI(Oversight.LoadFromOversight());
 
         switch (showMenu.inputScanner())
@@ -235,7 +235,7 @@ public class Main {
         }
     }
 
-    public static void selectToAdd(){
+    public static void selectToAdd() throws Exception {
         showMenu.displayMenuUI(menuCard);
         int choice = showMenu.inputScanner();
 
@@ -255,8 +255,7 @@ public class Main {
         }
     }
 
-    public static void SaveOrder()
-    {
+    public static void SaveOrder() throws Exception {
         try
         {
             long startTime = System.currentTimeMillis();
@@ -277,8 +276,7 @@ public class Main {
         orderMenu();
     }
 
-    public static void ActiveOrder()
-    {
+    public static void ActiveOrder() throws Exception {
         showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
         try
         {
