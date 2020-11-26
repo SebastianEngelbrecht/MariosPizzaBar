@@ -141,7 +141,7 @@ public class UI {
         displayText(totalPrice + "kr.");
         displayText();
     }
-//
+
 //    public void displayActiveOrder(Order[] Active){
 //        displayText();
 //        displayText("ACTIVE ORDERS");
@@ -169,13 +169,13 @@ public class UI {
             displayText("");
         } else
             {
-                for (int odrderNumber = 1; odrderNumber <= connection.getHighestIdOrderList(); odrderNumber++)
+                for (int orderNumber = 1; orderNumber <= connection.getHighestIdOrderList(); orderNumber++)
                 {
-                    displayText("Ordre nr: " + (odrderNumber), true);
+                    displayText("Ordre nr: " + (orderNumber), true);
 
-                    for (int pizzaOrderBy = 1; pizzaOrderBy <= connection.selectedCountOrderID(odrderNumber); pizzaOrderBy++)
+                    for (int pizzaOrderBy = 1; pizzaOrderBy <= connection.selectedCountOrderID(orderNumber); pizzaOrderBy++)
                     {
-                        displayText(order.getName(odrderNumber, pizzaOrderBy), order.getPrice(odrderNumber, pizzaOrderBy) + "kr.");
+                        displayText(connection.getPizzaNameWithOrder(orderNumber, pizzaOrderBy), connection.getPizzaPriceWithOrder(orderNumber, pizzaOrderBy) + "kr.");
                     }
                     displayText("");
                 }

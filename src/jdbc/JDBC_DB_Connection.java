@@ -29,6 +29,8 @@ public class JDBC_DB_Connection implements AutoCloseable {
     private PreparedStatement ps_reorder_pizzaList;
 
     private PreparedStatement ps_selected_count_orderID;
+    private PreparedStatement ps_get_pizza_name_with_order;
+    private PreparedStatement ps_get_pizza_price_with_order;
 
 
     public JDBC_DB_Connection(String db_url, String db_user, String db_password) throws SQLException {
@@ -249,6 +251,46 @@ public class JDBC_DB_Connection implements AutoCloseable {
         }
     }
 
+    public String getPizzaNameWithOrder(int orderNumber, int pizzaOrderBy) throws Exception
+    {
+        ps_get_pizza_name_with_order.setInt(1, orderNumber);
+
+        try (ResultSet rs = ps_get_pizza_name_with_order.executeQuery())
+        {
+            String name = null;
+            for (int i = 1; i <= pizzaOrderBy; i++)
+            {
+                rs.next();
+            }
+            name = rs.getString(4);
+            return name;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
+    public String getPizzaPriceWithOrder(int orderNumber, int pizzaOrderBy) throws Exception
+    {
+        ps_get_pizza_name_with_order.setInt(1, orderNumber);
+
+        try (ResultSet rs = ps_get_pizza_name_with_order.executeQuery())
+        {
+            String price = null;
+            for (int i = 1; i <= pizzaOrderBy; i++)
+            {
+                rs.next();
+            }
+            price = String.valueOf(rs.getFloat(5));
+            return price;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
    /* public void createPizzaIngredients() throws Exception
     {
         try (ResultSet rs = ps_create_pizzaIngredients.executeQuery())
@@ -308,5 +350,13 @@ public class JDBC_DB_Connection implements AutoCloseable {
                 "WHERE pizzalist_id = ?");
 
         ps_selected_count_orderID = connection.prepareStatement("SELECT COUNT(ID) FROM mariospizzabar.order WHERE ID = ?");
+
+        ps_get_pizza_name_with_order = connection.prepareStatement("SELECT * " +
+                "FROM mariospizzabar.order " +
+                "join mariospizzabar.pizzalist " +
+                "on mariospizzabar.order.pizzalist_id = mariospizzabar.pizzalist.pizzalist_id " +
+                "WHERE mariospizzabar.order.pizzalist_id = ? " +
+                "order by mariospizzabar.pizzalist.Name");
+//        ps_get_pizza_price_with_order;
     }
 }
