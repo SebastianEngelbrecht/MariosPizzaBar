@@ -1,4 +1,5 @@
 import jdbc.JDBC_DB_Connection;
+import jdbc.JDBC_DB_OrderList;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -141,17 +142,34 @@ public class UI {
         displayText();
     }
 
-    public void displayActiveOrder(Order[] Active){
+//    public void displayActiveOrder(Order[] Active){
+//        displayText();
+//        displayText("ACTIVE ORDERS");
+//        displayText(0, "RETURN");
+//        for (int i = 0; i < Active.length; i++)
+//        {
+//            Order order = Active[i];
+//            displayText("Ordre nr: " + (i+1) + " - " + order.getTimeStamp(),true);
+//            for (Product product : order.getList())
+//            {
+//                displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+//            }
+//            displayText("");
+//        }
+//        displayText("SELECT ORDER NR. TO COMPLETE ORDER");
+//        displayText();
+//    }
+
+    public void displayActiveOrder(JDBC_DB_Connection connection) throws Exception {
         displayText();
         displayText("ACTIVE ORDERS");
         displayText(0, "RETURN");
-        for (int i = 0; i < Active.length; i++)
+        for (int i = 1; i <= connection.getHighestIdOrderList(); i++)
         {
-            Order order = Active[i];
-            displayText("Ordre nr: " + (i+1) + " - " + order.getTimeStamp(),true);
-            for (Product product : order.getList())
+            displayText("Ordre nr: " + (i),true);
+            for (JDBC_DB_OrderList order : connection.getOrderList())
             {
-                displayText(product.getIndex() + ". " + product.getName() + " -- " + product.getDescription(), product.getPrice() + "kr.");
+                displayText(order.getName(), order.getPrice() + "kr.");
             }
             displayText("");
         }

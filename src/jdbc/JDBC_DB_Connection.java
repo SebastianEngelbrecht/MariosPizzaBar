@@ -14,12 +14,15 @@ public class JDBC_DB_Connection implements AutoCloseable {
     private PreparedStatement ps_get_pizzaList;
     private PreparedStatement ps_get_pizzaIngredients;
     private PreparedStatement ps_get_orderList;
+    private PreparedStatement ps_get_highest_id_orderList;
+    private PreparedStatement ps_get_highest_id_orderList_pizza;
 
     private PreparedStatement ps_create_pizzaList;
     private PreparedStatement ps_create_orderList;
     private PreparedStatement ps_create_pizzaIngredients;
 
     private PreparedStatement ps_delete_pizzaList;
+    private PreparedStatement ps_delete_orderList;
 
     private PreparedStatement ps_update_pizzaList;
 
@@ -72,19 +75,78 @@ public class JDBC_DB_Connection implements AutoCloseable {
 //        }
 //    }
 
-//    public void getOrderList() throws Exception
-//    {
-//        try (ResultSet rs = ps_get_orderList.executeQuery())
-//        {
-//            while (rs.next())
-//            {
-//
-//            }
-//        } catch (SQLException e)
-//        {
-//            throw new Exception(e);
-//        }
-//    }
+    public ArrayList<JDBC_DB_OrderList> getOrderList() throws Exception
+    {
+        ArrayList<JDBC_DB_OrderList> result = new ArrayList<>();
+
+        try (ResultSet rs = ps_get_orderList.executeQuery())
+        {
+            while (rs.next())
+            {
+                int id = rs.getInt(1);
+                int pizza = rs.getInt(2);
+                result.add(new JDBC_DB_OrderList(id, pizza));
+            }
+            return result;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
+    public int getHighestIdOrderList() throws Exception {
+        try (ResultSet rs = ps_get_highest_id_orderList.executeQuery())
+        {
+            int id = -1;
+            while (rs.next())
+            {
+                id = rs.getInt(1);
+            }
+            return id;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
+    public int getHighestIdOrderListPizza() throws Exception
+    {
+        try (ResultSet rs = ps_get_highest_id_orderList_pizza.executeQuery())
+        {
+            int pizzaID = -2;
+            while (rs.next())
+            {
+                pizzaID = rs.getInt(2);
+            }
+            return pizzaID;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
+    public void createOrderList(int id, int pizza) throws Exception
+    {
+        ps_create_orderList.setInt(1, id);
+        ps_create_orderList.setInt(2, pizza);
+        if (ps_create_orderList.executeUpdate() != 1)
+        {
+            throw new Exception("Could not create order");
+        }
+    }
+
+    public void insertOrderList(int id, int pizza) throws Exception
+    {
+        ps_create_orderList.setInt(1, id);
+        ps_create_orderList.setInt(2, pizza);
+        if (ps_create_orderList.executeUpdate() != 1)
+        {
+            throw new Exception("Could not create order");
+        }
+    }
 
     public void createPizzaList(String name, float price) throws Exception
     {
@@ -92,7 +154,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_create_pizzaList.setFloat(2, price);
         if (ps_create_pizzaList.executeUpdate() != 1)
         {
-            throw new Exception("Could not create Pizza");
+            throw new Exception("Could not create pizza");
         }
         reorderPizzaListId();
     }
@@ -105,7 +167,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_update_pizzaList.executeUpdate();
         if (ps_update_pizzaList.executeUpdate() != 1)
         {
-            throw new Exception("Could not update Pizza");
+            throw new Exception("Could not update pizza");
         }
     }
 
@@ -118,7 +180,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_update_pizzaList.executeUpdate();
         if (ps_update_pizzaList.executeUpdate() != 1)
         {
-            throw new Exception("Could not update Pizza");
+            throw new Exception("Could not update pizza");
         }
     }
 
@@ -131,7 +193,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_update_pizzaList.executeUpdate();
         if (ps_update_pizzaList.executeUpdate() != 1)
         {
-            throw new Exception("Could not update Pizza");
+            throw new Exception("Could not update pizza");
         }
     }
 
@@ -140,9 +202,18 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_delete_pizzaList.setString(1, name);
         if (ps_delete_pizzaList.executeUpdate() != 1)
         {
-            throw new Exception("Could not delete Pizza");
+            throw new Exception("Could not delete pizza");
         }
         reorderPizzaListId();
+    }
+
+    public void deleteOrderList(int id) throws Exception
+    {
+        ps_delete_orderList.setInt(1, id);
+        if (ps_delete_orderList.executeUpdate() != 1)
+        {
+            throw new Exception("Could not delete order(s)");
+        }
     }
 
     public void reorderPizzaListId() throws Exception
@@ -191,15 +262,22 @@ public class JDBC_DB_Connection implements AutoCloseable {
         connection = DriverManager.getConnection(db_url, db_user, db_password);
         ps_get_pizzaList = connection.prepareStatement("SELECT * FROM mariospizzabar.pizzalist");
 //        ps_get_pizzaIngredients = connection.prepareStatement("");
-//        ps_get_orderList = connection.prepareStatement("");
+        ps_get_orderList = connection.prepareStatement("SELECT * FROM mariospizzabar.order");
+        ps_get_highest_id_orderList = connection.prepareStatement("SELECT ID FROM mariospizzabar.order " +
+                "ORDER BY ID DESC LIMIT 1");
+        ps_get_highest_id_orderList_pizza = connection.prepareStatement("SELECT * FROM mariospizzabar.order " +
+                "ORDER BY ID DESC LIMIT 1");
 
         ps_create_pizzaList = connection.prepareStatement("INSERT INTO mariospizzabar.pizzalist " +
                 "(Name, Price) VALUES (?,?)");
-//        ps_create_orderList = connection.prepareStatement("");
+        ps_create_orderList = connection.prepareStatement("INSERT INTO mariospizzabar.order " +
+                "(ID, pizzalist_id) VALUES (?,?)");
 //        ps_create_pizzaIngredients = connection.prepareStatement("");
 
         ps_delete_pizzaList = connection.prepareStatement("DELETE FROM mariospizzabar.pizzalist " +
                 "WHERE Name = ?");
+        ps_delete_orderList = connection.prepareStatement("DELETE FROM mariospizzabar.order " +
+                "WHERE ID = ?");
 
         ps_update_pizzaList = connection.prepareStatement("UPDATE mariospizzabar.pizzalist " +
                 "SET Name = ?, Price = ? " +

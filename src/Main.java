@@ -83,10 +83,10 @@ public class Main {
     }
 
     public static void orderMenu() throws Exception {
-        if(currentOrder == null) {
-            currentOrder = new Order();
-            System.out.println("Creating New Order");
-        }
+//        if(currentOrder == null) {
+//            currentOrder = new Order();
+//            System.out.println("Creating New Order");
+//        }
 
         showMenu.displayOrderUI();
 
@@ -126,7 +126,7 @@ public class Main {
 
                     case 2:
                         //Cancel Current Order (NO)
-                        orderMenu();
+                        cancelOrder();
                         break;
 
                     default:
@@ -236,12 +236,13 @@ public class Main {
     }
 
     public static void selectToAdd() throws Exception {
-        showMenu.displayMenuUI(menuCard);
+        showMenu.displayMenuUI(connection);
         int choice = showMenu.inputScanner();
 
-        if (choice >= 1 && choice <= menuCard.getProductByIndex(menuCard.getProductSize()).getIndex())
+        if (choice >= 1 && choice <= connection.getPizzaList().size())
         {
-            currentOrder.addOrder(menuCard.getProductByIndex(choice));
+            int id = connection.getHighestIdOrderList();
+            currentOrder.addOrder(connection, id, choice);
             orderMenu();
         }
         else if(choice == 0)
@@ -255,48 +256,86 @@ public class Main {
         }
     }
 
-    public static void SaveOrder() throws Exception {
-        try
-        {
-            long startTime = System.currentTimeMillis();
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-            Date date = new Date(startTime);
+//    public static void SaveOrder() throws Exception {
+//        try
+//        {
+//            long startTime = System.currentTimeMillis();
+//            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+//            Date date = new Date(startTime);
+//
+//            FileWriter file = new FileWriter(String.valueOf(activeOrderFileLocation));
+//            file.write(currentOrder.toString() + " - " + formatter.format(date));
+//            file.close();
+//            currentOrder.setTimeStamp(formatter.format(date));
+//            Active.add(currentOrder);
+//            currentOrder = null;
+//        } catch (Exception e)
+//        {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//        orderMenu();
+//    }
 
-            FileWriter file = new FileWriter(String.valueOf(activeOrderFileLocation));
-            file.write(currentOrder.toString() + " - " + formatter.format(date));
-            file.close();
-            currentOrder.setTimeStamp(formatter.format(date));
-            Active.add(currentOrder);
-            currentOrder = null;
-        } catch (Exception e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+    public static void SaveOrder() throws Exception
+    {
+        int id = connection.getHighestIdOrderList();
+        connection.createOrderList(id + 1, -1);
         orderMenu();
     }
 
+    public static void cancelOrder() throws Exception
+    {
+        int id = connection.getHighestIdOrderList();
+        connection.deleteOrderList(id);
+        orderMenu();
+    }
+
+
+//    public static void ActiveOrder() throws Exception {
+//        showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
+//        try
+//        {
+//            File active = new File(String.valueOf(activeOrderFileLocation));
+//            Scanner activeScanner = new Scanner(active);
+//            activeScanner.close();
+//        } catch (Exception e)
+//        {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//        int choice = showMenu.inputScanner();
+//
+//        if (choice == 0)
+//        {
+//            orderMenu();
+//        } else if (choice <= Active.size() + 1)
+//        {
+//            Oversight.SaveToOversight(Active.get(choice - 1));
+//            Active.remove(choice - 1);
+//            ActiveOrder();
+//        }
+//        else
+//        {
+//            System.out.println("Error!");
+//            System.out.println("Cannot interpret input.");
+//            System.out.println("Try again.");
+//            ActiveOrder();
+//        }
+//    }
+
     public static void ActiveOrder() throws Exception {
-        showMenu.displayActiveOrder(Active.toArray(new Order[Active.size()]));
-        try
-        {
-            File active = new File(String.valueOf(activeOrderFileLocation));
-            Scanner activeScanner = new Scanner(active);
-            activeScanner.close();
-        } catch (Exception e)
-        {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+        showMenu.displayActiveOrder(connection);
+
         int choice = showMenu.inputScanner();
 
         if (choice == 0)
         {
             orderMenu();
-        } else if (choice <= Active.size() + 1)
+        } else if (choice <= connection.getHighestIdOrderList())
         {
-            Oversight.SaveToOversight(Active.get(choice - 1));
-            Active.remove(choice - 1);
+            //needs "saving to oversight" later
+            connection.deleteOrderList(choice);
             ActiveOrder();
         }
         else

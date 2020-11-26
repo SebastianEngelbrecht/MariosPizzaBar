@@ -1,8 +1,12 @@
+import jdbc.JDBC_DB_Connection;
+import jdk.nashorn.internal.scripts.JD;
+
 import java.util.ArrayList;
 
 public class Order {
     private ArrayList<Product> list = new ArrayList<>();
     private String timeStamp;
+    private JDBC_DB_Connection connection;
 
     public void setTimeStamp(String timeStamp)
     {
@@ -23,8 +27,27 @@ public class Order {
         return result;
     }
 
-    public void addOrder(Product toAdd){
-        list.add(toAdd);
+    public void addOrder(JDBC_DB_Connection connection, int id, int pizza) throws Exception {
+        this.connection = connection;
+
+        if (id == -1 && connection.getHighestIdOrderListPizza() == -2)
+        {
+            connection.createOrderList(1, pizza);
+        }
+        else if (connection.getHighestIdOrderListPizza() == -1)
+        {
+            int tempID = connection.getHighestIdOrderList();
+            connection.insertOrderList(tempID, pizza);
+        }
+        else if (id > (-1) && connection.getHighestIdOrderListPizza() != -1)
+        {
+           int highId = connection.getHighestIdOrderList();
+           connection.createOrderList(highId, pizza);
+        }
+        else
+        {
+            throw new Exception("-1");
+        }
     }
 
     public void removeOrder(int index, int amount){

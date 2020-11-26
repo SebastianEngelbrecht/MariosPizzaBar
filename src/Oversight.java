@@ -82,7 +82,7 @@ public class Oversight {
                             for(String intText: dataSplit[1].split(",")){
                                 String[] splitText = intText.split(" ");
                                 intText = splitText[splitText.length - 1];
-                                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText)));
+//                                toAdd.addOrder(MenuCard.getProductByIndex(parseInt(intText)));
                             }
 
                             result.add(toAdd);
