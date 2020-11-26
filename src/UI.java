@@ -141,7 +141,7 @@ public class UI {
         displayText(totalPrice + "kr.");
         displayText();
     }
-
+//
 //    public void displayActiveOrder(Order[] Active){
 //        displayText();
 //        displayText("ACTIVE ORDERS");
@@ -164,16 +164,23 @@ public class UI {
         displayText();
         displayText("ACTIVE ORDERS");
         displayText(0, "RETURN");
-        for (int i = 1; i <= connection.getHighestIdOrderList(); i++)
+        if (connection.getHighestIdOrderList() == -1)
         {
-            displayText("Ordre nr: " + (i),true);
-            for (JDBC_DB_OrderList order : connection.getOrderList())
-            {
-                displayText(order.getName(), order.getPrice() + "kr.");
-            }
             displayText("");
-        }
-        displayText("SELECT ORDER NR. TO COMPLETE ORDER");
+        } else
+            {
+                for (int odrderNumber = 1; odrderNumber <= connection.getHighestIdOrderList(); odrderNumber++)
+                {
+                    displayText("Ordre nr: " + (odrderNumber), true);
+
+                    for (int pizzaOrderBy = 1; pizzaOrderBy <= connection.selectedCountOrderID(odrderNumber); pizzaOrderBy++)
+                    {
+                        displayText(order.getName(odrderNumber, pizzaOrderBy), order.getPrice(odrderNumber, pizzaOrderBy) + "kr.");
+                    }
+                    displayText("");
+                }
+                displayText("SELECT ORDER NR. TO COMPLETE ORDER");
+            }
         displayText();
     }
 

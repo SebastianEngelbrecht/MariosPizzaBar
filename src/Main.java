@@ -332,6 +332,9 @@ public class Main {
         if (choice == 0)
         {
             orderMenu();
+        } else if (connection.getHighestIdOrderList() == -1)
+        {
+            orderMenu();
         } else if (choice <= connection.getHighestIdOrderList())
         {
             //needs "saving to oversight" later

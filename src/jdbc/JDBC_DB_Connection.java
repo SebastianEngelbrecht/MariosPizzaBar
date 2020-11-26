@@ -28,6 +28,8 @@ public class JDBC_DB_Connection implements AutoCloseable {
 
     private PreparedStatement ps_reorder_pizzaList;
 
+    private PreparedStatement ps_selected_count_orderID;
+
 
     public JDBC_DB_Connection(String db_url, String db_user, String db_password) throws SQLException {
         this.db_url = db_url;
@@ -229,6 +231,24 @@ public class JDBC_DB_Connection implements AutoCloseable {
         }
     }
 
+    public int selectedCountOrderID(int i) throws Exception
+    {
+        ps_selected_count_orderID.setInt(1, i);
+
+        try (ResultSet rs = ps_selected_count_orderID.executeQuery())
+        {
+            int id = -1;
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+            return id;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception(e);
+        }
+    }
+
    /* public void createPizzaIngredients() throws Exception
     {
         try (ResultSet rs = ps_create_pizzaIngredients.executeQuery())
@@ -286,5 +306,7 @@ public class JDBC_DB_Connection implements AutoCloseable {
         ps_reorder_pizzaList = connection.prepareStatement("UPDATE mariospizzabar.pizzalist " +
                 "SET pizzalist_id = ? " +
                 "WHERE pizzalist_id = ?");
+
+        ps_selected_count_orderID = connection.prepareStatement("SELECT COUNT(ID) FROM mariospizzabar.order WHERE ID = ?");
     }
 }
